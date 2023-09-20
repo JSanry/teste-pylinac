@@ -12,21 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 import streamlit as st
 from streamlit.logger import get_logger
+from pylinac import Starshot
+my_star = Starshot.from_demo_image()
+my_star.analyze(radius=0.85, tolerance=0.8)
 
 LOGGER = get_logger(__name__)
 
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="TESTEPylinac",
         page_icon="👋",
     )
 
     st.write("# Welcome to Streamlit! 👋")
 
-    st.sidebar.success("Select a demo above.")
+    st.sidebar.success("Selecione Testes Acima")
 
     st.markdown(
         """
@@ -46,6 +50,15 @@ def run():
     """
     )
 
+    st.markdown('''
+    # EXIBIR
 
+    ## UPLOAD O SEU ARQUIVO
+    ''')
+
+    arquivo = st.file_uploader(
+        'Suba seu arquivo!',
+        type=['jpg','png','dcom']
+    ) 
 if __name__ == "__main__":
     run()
