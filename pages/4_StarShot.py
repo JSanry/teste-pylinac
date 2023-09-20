@@ -17,8 +17,11 @@ from urllib.error import URLError
 import altair as alt
 import pandas as pd
 
-import streamlit as st
+from pylinac import Starshot
+my_star = Starshot.from_demo_image()
+my_star.analyze(radius=0.85, tolerance=0.8)
 
+import streamlit as st
 from streamlit.hello.utils import show_code
 
 
@@ -65,14 +68,14 @@ def data_frame_demo():
         )
 
 
-st.set_page_config(page_title="DataFrame Demo", page_icon="📊")
-st.markdown("# DataFrame Demo")
-st.sidebar.header("DataFrame Demo")
+st.set_page_config(page_title="StarShot", page_icon="📊")
+st.markdown("# StarShot")
+st.sidebar.header("StarShotFrame Demo")
 st.write(
     """This demo shows how to use `st.write` to visualize Pandas DataFrames.
 (Data courtesy of the [UN Data Explorer](http://data.un.org/Explorer.aspx).)"""
 )
 
-data_frame_demo()
+StarShot()
 
-show_code(data_frame_demo)
+show_code(StarShot)
