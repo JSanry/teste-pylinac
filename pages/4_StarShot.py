@@ -25,7 +25,7 @@ import streamlit as st
 from streamlit.hello.utils import show_code
 
 
-def data_frame_demo():
+def StarShot():
     @st.cache_data
     def get_UN_data():
         AWS_BUCKET_URL = "https://streamlit-demo-data.s3-us-west-2.amazonaws.com"
@@ -68,7 +68,7 @@ def data_frame_demo():
         )
 
 
-st.set_page_config(page_title="StarShot", page_icon="📊")
+st.set_page_config(page_title="StarShot", page_icon="🎇")
 st.markdown("# StarShot")
 st.sidebar.header("StarShotFrame Demo")
 st.write(
