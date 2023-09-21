@@ -19,7 +19,7 @@ import pandas as pd
 from PIL import Image
 
 from pylinac import Starshot
-my_star = Starshot.from_demo_image()
+#my_star = Starshot.from_demo_image()
 #my_star.analyze(radius=0.85, tolerance=0.8)
 
 import streamlit as st
