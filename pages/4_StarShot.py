@@ -16,16 +16,38 @@ from urllib.error import URLError
 
 import altair as alt
 import pandas as pd
+from PIL import Image
 
 from pylinac import Starshot
 my_star = Starshot.from_demo_image()
-my_star.analyze(radius=0.85, tolerance=0.8)
+#my_star.analyze(radius=0.85, tolerance=0.8)
 
 import streamlit as st
 from streamlit.hello.utils import show_code
+import pandas as pd
 
 
 def StarShot():
+    st.write("Here's our first attempt at using data to create a table:")
+    st.write(pd.DataFrame({
+        'first column': [1, 2, 3, 4],
+        'second column': [10, 20, 30, 40]
+    }))
+
+    #st.text_input("Tolerance", key="tolerancia")
+    
+    st.title('upload da imagem')
+    star_img = st.file_uploader('upload')
+    my_star = Starshot(star_img)
+    tol = st.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.85)
+    r = st.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.85)
+    my_star.analyze(radius=r, tolerance=tol)
+    st.write(my_star.results())
+    my_star.save_analyzed_image("mystar.png")
+    img_star= Image.open('mystar.png')
+
+    st.image(img_star, output_format="auto")
+    # You can access the value at any point with:
     @st.cache_data
     def get_UN_data():
         AWS_BUCKET_URL = "https://streamlit-demo-data.s3-us-west-2.amazonaws.com"
@@ -69,7 +91,7 @@ def StarShot():
 
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
-st.markdown("# StarShot")
+st.markdown("# StarShot 🎇")
 st.sidebar.header("StarShotFrame Demo")
 st.write(
     """This demo shows how to use `st.write` to visualize Pandas DataFrames.
