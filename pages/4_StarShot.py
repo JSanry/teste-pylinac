@@ -94,8 +94,7 @@ st.set_page_config(page_title="StarShot", page_icon="🎇")
 st.markdown("# StarShot 🎇")
 st.sidebar.header("StarShotFrame Demo")
 st.write(
-    """This demo shows how to use `st.write` to visualize Pandas DataFrames.
-(Data courtesy of the [UN Data Explorer](http://data.un.org/Explorer.aspx).)"""
+    """Teste"""
 )
 
 StarShot()
