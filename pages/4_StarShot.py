@@ -38,7 +38,7 @@ def StarShot():
     
     st.title('upload da imagem')
     star_img = st.file_uploader('upload')
-    my_star = Starshot(star_img)
+    my_star = Starshot(star_img, dpi=100, sid=1000)
     tol = st.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.85)
     r = st.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.85)
     my_star.analyze(radius=r, tolerance=tol)
