@@ -39,7 +39,7 @@ def StarShot():
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     st.title('upload da imagem')
     star_img = st.file_uploader('upload')
-    if star_image is not None:
+    if star_img is not None:
         my_star = Starshot(star_img, dpi=100, sid=1000)
         my_star.analyze(radius=r, tolerance=tol)
         st.write(my_star.results())
