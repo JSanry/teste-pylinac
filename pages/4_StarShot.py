@@ -48,6 +48,7 @@ def StarShot():
         st.image(img_star, output_format="auto")
         my_star.publish_pdf(filename=nomepdf)
         #st.download_button('Download binary file', nome.pdf)
+        #st
 
         
 
