@@ -46,8 +46,8 @@ def StarShot():
         my_star.save_analyzed_image("mystar.png")
         img_star= Image.open('mystar.png')
         st.image(img_star, output_format="auto")
-        #my_star.publish_pdf(filename="Rpdf",open_file=False)
-        with open(my_star.publish_pdf(filename="Rpdf",open_file=False), "rb") as pdf_file:
+        my_star.publish_pdf(filename="Rpdf",open_file=False)
+        with open("Rpdf.pdf") as pdf_file:
             PDFResult = pdf_file.read()
         st.download_button(label="Download PDF",
                     data=PDFResult,
