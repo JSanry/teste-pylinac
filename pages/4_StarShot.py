@@ -52,7 +52,8 @@ def StarShot():
         st.download_button(label="Download PDF",
                     data=PDFbyte,
                     file_name="test.pdf",
-                    mime='application/octet-stream')      
+                    #mime='application/octet-stream'
+                    )      
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 st.markdown("# StarShot 🎇")
