@@ -35,60 +35,18 @@ def StarShot():
     }))
 
     #st.text_input("Tolerance", key="tolerancia")
-    
+    tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.8)
+    r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     st.title('upload da imagem')
     star_img = st.file_uploader('upload')
-    my_star = Starshot(star_img, dpi=100, sid=1000)
-    tol = st.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.8)
-    r = st.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
-    my_star.analyze(radius=r, tolerance=tol)
-    st.write(my_star.results())
-    my_star.save_analyzed_image("mystar.png")
-    img_star= Image.open('mystar.png')
-
-    st.image(img_star, output_format="auto")
-    # You can access the value at any point with:
-    @st.cache_data
-    def get_UN_data():
-        AWS_BUCKET_URL = "https://streamlit-demo-data.s3-us-west-2.amazonaws.com"
-        df = pd.read_csv(AWS_BUCKET_URL + "/agri.csv.gz")
-        return df.set_index("Region")
-
-    try:
-        df = get_UN_data()
-        countries = st.multiselect(
-            "Choose countries", list(df.index), ["China", "United States of America"]
-        )
-        if not countries:
-            st.error("Please select at least one country.")
-        else:
-            data = df.loc[countries]
-            data /= 1000000.0
-            st.write("### Gross Agricultural Production ($B)", data.sort_index())
-
-            data = data.T.reset_index()
-            data = pd.melt(data, id_vars=["index"]).rename(
-                columns={"index": "year", "value": "Gross Agricultural Product ($B)"}
-            )
-            chart = (
-                alt.Chart(data)
-                .mark_area(opacity=0.3)
-                .encode(
-                    x="year:T",
-                    y=alt.Y("Gross Agricultural Product ($B):Q", stack=None),
-                    color="Region:N",
-                )
-            )
-            st.altair_chart(chart, use_container_width=True)
-    except URLError as e:
-        st.error(
-            """
-            **This demo requires internet access.**
-            Connection error: %s
-        """
-            % e.reason
-        )
-
+    if star_image is not None:
+        my_star = Starshot(star_img, dpi=100, sid=1000)
+        my_star.analyze(radius=r, tolerance=tol)
+        st.write(my_star.results())
+        my_star.save_analyzed_image("mystar.png")
+        img_star= Image.open('mystar.png')
+        st.image(img_star, output_format="auto")
+    
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 st.markdown("# StarShot 🎇")
