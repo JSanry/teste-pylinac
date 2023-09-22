@@ -48,7 +48,7 @@ def StarShot():
         st.image(img_star, output_format="auto")
         my_star.publish_pdf(filename="testpdf")
         with open("dummy.pdf", "rb") as pdf_file:
-        PDF = pdf_file.read()
+            PDF = pdf_file.read()
         st.download_button(label="Download PDF",
                     data=PDFbyte,
                     file_name="test.pdf",
