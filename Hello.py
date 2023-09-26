@@ -48,16 +48,5 @@ def run():
         - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
     """
     )
-
-    st.markdown('''
-    # EXIBIR
-
-    ## UPLOAD O SEU ARQUIVO
-    ''')
-
-    arquivo = st.file_uploader(
-        'Suba seu arquivo!',
-        type=['jpg','png','dcom']
-    ) 
 if __name__ == "__main__":
     run()
