@@ -45,7 +45,7 @@ def StarShot():
         st.image(img_star, output_format="auto")
         
         #Gerar pdf
-        printpdf = st.button(Gerar pdf)
+        printpdf = st.button("Gerar pdf")
         if printpdf:
             my_star.publish_pdf(filename="res",open_file=False)
             with open("res.pdf") as pdf_file:
