@@ -19,8 +19,6 @@ import pandas as pd
 from PIL import Image
 
 from pylinac import Starshot
-#my_star = Starshot.from_demo_image()
-#my_star.analyze(radius=0.85, tolerance=0.8)
 
 import streamlit as st
 from streamlit.hello.utils import show_code
@@ -34,7 +32,6 @@ def StarShot():
         'second column': [15, 25, 30, 40]
     }))
 
-    #st.text_input("Tolerance", key="tolerancia")
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     st.title('upload da imagem')
@@ -46,14 +43,18 @@ def StarShot():
         my_star.save_analyzed_image("mystar.png")
         img_star= Image.open('mystar.png')
         st.image(img_star, output_format="auto")
-        my_star.publish_pdf(filename="Rpdf",open_file=False)
-        with open("Rpdf.pdf") as pdf_file:
+        
+        #Gerar pdf
+        printpdf = st.button(Gerar pdf)
+        if printpdf:
+            my_star.publish_pdf(filename="res",open_file=False)
+            with open("res.pdf") as pdf_file:
             PDFResult = pdf_file.read()
-        st.download_button(label="Download PDF",
-                    data=PDFResult,
-                    file_name="test.pdf",
+            st.download_button(label="Download PDF",
+                        data=PDFResult,
+                        file_name="test.pdf",
                     #mime='application/octet-stream'
-                    )      
+                        )      
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 st.markdown("# StarShot 🎇")

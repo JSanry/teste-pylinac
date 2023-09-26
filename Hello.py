@@ -16,8 +16,7 @@
 import streamlit as st
 from streamlit.logger import get_logger
 from pylinac import Starshot
-#my_star = Starshot.from_demo_image()
-my_star.analyze(radius=0.85, tolerance=0.8)
+
 
 LOGGER = get_logger(__name__)
 
