@@ -49,7 +49,7 @@ def StarShot():
         if printpdf:
             my_star.publish_pdf(filename="res",open_file=False)
             with open("res.pdf") as pdf_file:
-            PDFResult = pdf_file.read()
+                PDFResult = pdf_file.read()
             st.download_button(label="Download PDF",
                         data=PDFResult,
                         file_name="test.pdf",
