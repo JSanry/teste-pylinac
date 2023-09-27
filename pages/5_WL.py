@@ -19,15 +19,14 @@ import pandas as pd
 from PIL import Image
 from datetime import date
 from fpdf import FPDF
-
-from pylinac import Starshot
+from pylinac.winston_lutz import WinstonLutz, MachineScale
 
 import streamlit as st
 from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def StarShot():
+def WinstonLutz():
     #st.write("Here's our first attempt at using data to create a table:")
     #st.write(pd.DataFrame({
     #    'first column': [1, 2, 3, 4],
