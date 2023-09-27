@@ -17,6 +17,9 @@ from urllib.error import URLError
 import altair as alt
 import pandas as pd
 from PIL import Image
+from datetime import date
+from fpdf import FPDF
+import datetime
 
 from pylinac import Starshot
 
@@ -26,11 +29,11 @@ import pandas as pd
 
 
 def StarShot():
-    st.write("Here's our first attempt at using data to create a table:")
-    st.write(pd.DataFrame({
-        'first column': [1, 2, 3, 4],
-        'second column': [15, 25, 30, 40]
-    }))
+    #st.write("Here's our first attempt at using data to create a table:")
+    #st.write(pd.DataFrame({
+    #    'first column': [1, 2, 3, 4],
+    #    'second column': [15, 25, 30, 40]
+    #}))
 
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
@@ -44,24 +47,35 @@ def StarShot():
         img_star= Image.open('mystar.png')
         st.image(img_star, output_format="auto")
         
+        st.title('Defenições PDF')
+        
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
+        with col2:
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
+        with col3:
+            Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ))
+
+        today = date.today()
+        d = st.date_input("Data de realização do teste:", value= today)    
+        data = d.strftime("%d_%m_%Y")
+        nomepdf = 'StarShot_' + Unit + Par + data +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
-            my_star.publish_pdf(filename="res.pdf",open_file=False)
-            with open("res.pdf") as pdf_file:
-                PDFResult = pdf_file.read()
+            my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
+            with open("res.pdf", "rb") as pdf_file:
+                PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
-                        data=PDFResult,
-                        file_name="test.pdf",
-                    #mime='application/octet-stream'
-                        )      
+                               data=PDFbyte,
+                               file_name=nomepdf,
+                               mime='application/octet-stream')      
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 st.markdown("# StarShot 🎇")
-st.sidebar.header("StarShotFrame Demo")
-st.write(
-    """Teste"""
-)
+st.sidebar.header("StarShot")
+#st.write("""Teste""")
 
 StarShot()
 
