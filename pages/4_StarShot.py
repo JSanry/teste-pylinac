@@ -72,8 +72,8 @@ def StarShot():
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
-            img_logo= Image.open('logoinrad.png')
-            my_star.publish_pdf(filename="res.pdf",open_file=False,  logo= img_logo, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
+            #img_logo= Image.open('logoinrad.png')
+            my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
