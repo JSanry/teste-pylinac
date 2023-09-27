@@ -15,8 +15,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-from pylinac import Starshot
-
+from PIL import Image
 
 LOGGER = get_logger(__name__)
 
@@ -26,7 +25,9 @@ def run():
         page_title="TESTEPylinac",
         page_icon="👋",
     )
+    #image = Image.open('logoinrad.png')
 
+    #st.image(image, caption='Sunrise by the mountains')
     st.write("# Welcome to Streamlit! 👋")
 
     st.sidebar.success("Selecione Testes Acima")
