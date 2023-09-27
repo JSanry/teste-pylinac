@@ -35,14 +35,23 @@ def StarShot():
     #    'second column': [15, 25, 30, 40]
     #}))
 
-    tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.2, max_value=0.95, value=0.8)
+    tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     st.title('upload da imagem')
     star_img = st.file_uploader('upload')
     if star_img is not None:
         my_star = Starshot(star_img, dpi=100, sid=1000)
         my_star.analyze(radius=r, tolerance=tol)
-        st.write(my_star.results())
+        #st.write(my_star.results())
+        data = my_star.results_data()
+        if data.passed:
+            st.markdown("### Resultado Passou ")
+        else:
+            st.markdown("### Resultado Não Passou! ")
+           
+        st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
+        st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
+        
         my_star.save_analyzed_image("mystar.png")
         img_star= Image.open('mystar.png')
         st.image(img_star, output_format="auto")
@@ -59,8 +68,8 @@ def StarShot():
 
         today = date.today()
         d = st.date_input("Data de realização do teste:", value= today)    
-        data = d.strftime("%d_%m_%Y")
-        nomepdf = 'StarShot_' + Unit + Par + data +'.pdf'
+        date = d.strftime("%d_%m_%Y")
+        nomepdf = 'StarShot_' + Unit + Par + date +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
