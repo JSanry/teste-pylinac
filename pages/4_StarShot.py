@@ -19,7 +19,6 @@ import pandas as pd
 from PIL import Image
 from datetime import date
 from fpdf import FPDF
-import datetime
 
 from pylinac import Starshot
 
@@ -67,9 +66,9 @@ def StarShot():
             Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ))
 
         today = date.today()
-        d = st.date_input("Data de realização do teste:", value= today)    
-        date = d.strftime("%d_%m_%Y")
-        nomepdf = 'StarShot_' + Unit + Par + date +'.pdf'
+        dia = st.date_input("Data de realização do teste:", value= date.today())    
+        data_teste = dia.strftime("%d_%m_%Y")
+        nomepdf = 'StarShot_' + Unit + Par + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
