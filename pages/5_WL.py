@@ -37,11 +37,10 @@ def WL():
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     st.title('upload da imagens')
-    imgs = st.file_uploader('upload', accept_multiple_files=True)
-    if imgs is not None:
-        wl = WinstonLutz(imgs,use_filenames=True)
+    img_wl = st.file_uploader('upload', accept_multiple_files=True)
+    if img_wl is not None:
+        wl = WinstonLutz(img_wl,use_filenames=True)
         wl.analyze(bb_size_mm=5, machine_scale=MachineScale.ELEKTA_IEC)
-        #st.write(my_star.results())
         data = wl.results_data()
         #if data.passed:
             #st.markdown("### Resultado Passou ")
@@ -57,23 +56,21 @@ def WL():
         
         st.title('Defenições PDF')
         
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3 = st.columns(2)
         with col1:
             Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
         with col2:
             Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
-        with col3:
-            Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ))
 
-        today = date.today()
+        #today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'WL_' + Unit + Par + data_teste +'.pdf'
+        nomepdf = 'WL_' + Unit + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            wl.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
+            wl.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
