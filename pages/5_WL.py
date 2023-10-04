@@ -56,7 +56,7 @@ def WL():
         
         st.title('Defenições PDF')
         
-        col1, col2, col3 = st.columns(2)
+        col1, col2 = st.columns(2)
         with col1:
             Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
         with col2:
