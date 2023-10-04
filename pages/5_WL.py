@@ -20,14 +20,14 @@ from PIL import Image
 from datetime import date
 from fpdf import FPDF
 
-from pylinac import Starshot
+from pylinac.winston_lutz import WinstonLutz, MachineScale
 
 import streamlit as st
 from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def StarShot():
+def WL():
     #st.write("Here's our first attempt at using data to create a table:")
     #st.write(pd.DataFrame({
     #    'first column': [1, 2, 3, 4],
@@ -36,24 +36,24 @@ def StarShot():
 
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
-    st.title('upload da imagem')
-    star_img = st.file_uploader('upload')
-    if star_img is not None:
-        my_star = Starshot(star_img, dpi=100, sid=1000)
-        my_star.analyze(radius=r, tolerance=tol)
+    st.title('upload da imagens')
+    imgs = st.file_uploader('upload', accept_multiple_files=True)
+    if imgs is not None:
+        wl = WinstonLutz(imgs,use_filenames=True)
+        wl.analyze(bb_size_mm=5, machine_scale=MachineScale.ELEKTA_IEC)
         #st.write(my_star.results())
-        data = my_star.results_data()
-        if data.passed:
+        data = wl.results_data()
+        #if data.passed:
             st.markdown("### Resultado Passou ")
-        else:
+        #else:
             st.markdown("### Resultado Não Passou! ")
            
-        st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
-        st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
+        #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
+        #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
         
-        my_star.save_analyzed_image("mystar.png")
-        img_star= Image.open('mystar.png')
-        st.image(img_star, output_format="auto")
+        #my_star.save_analyzed_image("mystar.png")
+        #img_star= Image.open('mystar.png')
+        #st.image(img_star, output_format="auto")
         
         st.title('Defenições PDF')
         
@@ -68,12 +68,12 @@ def StarShot():
         today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'StarShot_' + Unit + Par + data_teste +'.pdf'
+        nomepdf = 'WL_' + Unit + Par + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
+            wl.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
@@ -81,11 +81,11 @@ def StarShot():
                                file_name=nomepdf,
                                mime='application/octet-stream')      
 
-st.set_page_config(page_title="Winston-Lutz", page_icon="🎇")
-st.markdown("# StarShot 🎇")
-st.sidebar.header("StarShot")
+st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
+st.markdown("# Winston-Lutz 🎯")
+st.sidebar.header("Winston-Lutz")
 #st.write("""Teste""")
 
-StarShot()
+WL()
 
-show_code(StarShot)
+show_code(WL)
