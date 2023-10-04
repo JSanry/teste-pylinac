@@ -72,9 +72,9 @@ def WL():
             M = wl.images[i].couch_angle
             xV = wl.images[i].cax2bb_vector.x
             yV = wl.images[i].cax2bb_vector.y
-            t[0].append(G)
-            t[1].append(C)
-            t[2].append(M)
+            t[0].append(round(G,1))
+            t[1].append(round(C,1))
+            t[2].append(round(M,1))
             if M != 0:
                 x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
                 y=(round(-xV*math.sin(math.radians(M))+yV*math.cos(math.radians(M)),4))
@@ -102,12 +102,12 @@ def WL():
         t[0].append("--")
         t[1].append("--")
         t[2].append("Média")
-        t[3].append(round(soma[0]/soma[1],4))
-        t[4].append(soma[2]/soma[3])
-        t[5].append(soma[4]/soma[5])
+        t[3].append(round(soma[0]/soma[1],3))
+        t[4].append(round(soma[2]/soma[3],3))
+        t[5].append(round(soma[4]/soma[5],3))
 
         st.write(wl.bb_shift_instructions())
-        
+
         tb = pd.DataFrame({
         'Gantry': t[0],
         'Colimador': t[1],
