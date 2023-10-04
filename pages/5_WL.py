@@ -36,7 +36,7 @@ def WL():
     #}))
     a=[[0,1,3],[1,6,8]]
     st.write(a)
-    tabulate(a,headers=["a","b","c"])
+    st.write(tabulate(a,headers=["a","b","c"]))
     
 
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
