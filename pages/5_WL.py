@@ -146,7 +146,7 @@ def WL():
         'LAT x (mm)': t[3],
         'LONG y (mm)': t[4],
         'VERT z (mm)': t[5],
-        },hide_index=True)
+        })
 
         st.dataframe(tb,hide_index=True)
 
