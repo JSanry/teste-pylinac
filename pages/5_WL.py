@@ -58,7 +58,7 @@ def WL():
         #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
         
         wl.save_images("g.png", axis='Gantry')
-        wl.save_images("col.png",axis='Collimator')
+        wl.save_images("c.png",axis='Collimator')
         wl.save_images("m.png", axis='Couch')
         wl.save_summary("s.png")
         
@@ -98,7 +98,7 @@ def WL():
         st.image(img_m, output_format="auto") 
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
-        img_c= Image.open('col.png')
+        img_c= Image.open('c.png')
         st.image(img_c, output_format="auto")
 
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
