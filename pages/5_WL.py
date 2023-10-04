@@ -44,9 +44,9 @@ def WL():
         #st.write(my_star.results())
         data = wl.results_data()
         #if data.passed:
-            st.markdown("### Resultado Passou ")
+            #st.markdown("### Resultado Passou ")
         #else:
-            st.markdown("### Resultado Não Passou! ")
+            #st.markdown("### Resultado Não Passou! ")
            
         #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
         #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
