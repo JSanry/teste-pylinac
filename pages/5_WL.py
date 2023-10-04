@@ -51,6 +51,31 @@ def WL():
         #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
         #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
 
+        st.title('Defenições PDF')
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
+        with col2:
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
+
+        #today = date.today()
+        dia = st.date_input("Data de realização do teste:", value= date.today())    
+        data_teste = dia.strftime("%d_%m_%Y")
+        nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
+        #Gerar pdf
+        printpdf = st.button("Gerar pdf")
+
+        if printpdf:
+            #img_logo= Image.open('logoinrad.png')
+            wl.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit})
+            with open("res.pdf", "rb") as pdf_file:
+                PDFbyte = pdf_file.read()
+            st.download_button(label="Download PDF",
+                               data=PDFbyte,
+                               file_name=nomepdf,
+                               mime='application/octet-stream')  
+
         wl.save_images("g.png", axis='Gantry')
         wl.save_images("c.png",axis='Collimator')
         wl.save_images("m.png", axis='Couch')
@@ -126,30 +151,7 @@ def WL():
         img_m= Image.open('m.png')
         st.image(img_m, output_format="auto") 
 
-        st.title('Defenições PDF')
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
-        with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
-
-        #today = date.today()
-        dia = st.date_input("Data de realização do teste:", value= date.today())    
-        data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
-        #Gerar pdf
-        printpdf = st.button("Gerar pdf")
-
-        if printpdf:
-            #img_logo= Image.open('logoinrad.png')
-            wl.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit})
-            with open("res.pdf", "rb") as pdf_file:
-                PDFbyte = pdf_file.read()
-            st.download_button(label="Download PDF",
-                               data=PDFbyte,
-                               file_name=nomepdf,
-                               mime='application/octet-stream')     
+           
 
 
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
