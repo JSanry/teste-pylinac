@@ -20,11 +20,11 @@ def PicketFence():
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     orient = st.sidebar.selectbox('Orientação',('Left-Right', 'Up-Down'))
     #names =st.sidebar.checkbox('Usar Nome de Arquivos')
-    mlc_ar = MLC.MILLENNIUM
+    #mlc_ar = MLC.MILLENNIUM
     st.title('upload da imagem')
     pf_img = st.file_uploader('upload')
     if pf_img is not None:
-        pf = PicketFence(pf_img, mlc= mlc_ar)
+        pf = PicketFence(pf_img)
         pf.analyze(tolerance=tol, action_tolerance=a_tol, orientation=orient)
         #st.write(my_star.results())
         data = pf.results_data()
