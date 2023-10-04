@@ -81,7 +81,7 @@ def StarShot():
                                file_name=nomepdf,
                                mime='application/octet-stream')      
 
-st.set_page_config(page_title="StarShot", page_icon="🎇")
+st.set_page_config(page_title="Winston-Lutz", page_icon="🎇")
 st.markdown("# StarShot 🎇")
 st.sidebar.header("StarShot")
 #st.write("""Teste""")
