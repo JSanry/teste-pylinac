@@ -19,6 +19,7 @@ import pandas as pd
 from PIL import Image
 from datetime import date
 from fpdf import FPDF
+from tabulate import tabulate
 
 from pylinac.winston_lutz import WinstonLutz, MachineScale
 
@@ -33,8 +34,10 @@ def WL():
     #    'first column': [1, 2, 3, 4],
     #    'second column': [15, 25, 30, 40]
     #}))
-    a=[0,1,3,4,6]
+    a=[[0,1,3],[1,6,8]]
     st.write(a)
+    tabulate(a,headers=["a","b","c"])
+    
 
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
