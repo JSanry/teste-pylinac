@@ -50,8 +50,6 @@ def WL():
            
         #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
         #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
-        
-        st.write(wl.bb_shift_instructions())
 
         wl.save_images("g.png", axis='Gantry')
         wl.save_images("c.png",axis='Collimator')
@@ -108,6 +106,8 @@ def WL():
         t[4].append(soma[2]/soma[3])
         t[5].append(soma[4]/soma[5])
 
+        st.write(wl.bb_shift_instructions())
+        
         tb = pd.DataFrame({
         'Gantry': t[0],
         'Colimador': t[1],
