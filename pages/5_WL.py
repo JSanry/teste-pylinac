@@ -30,10 +30,10 @@ import pandas as pd
 
 def WL():
     #st.write("Here's our first attempt at using data to create a table:")
-    #st.write(pd.DataFrame({
-    #    'first column': [1, 2, 3, 4],
-    #    'second column': [15, 25, 30, 40]
-    #}))
+    st.write(pd.DataFrame({
+        'first column': [1, 2, 3, 4],
+        'second column': [15, 25, 30, 40]
+    }))
     a=[[0,1,3],[1,6,8]]
     st.write(a)
     st.markdown(tabulate(a,headers=["a","b","c"]))
@@ -94,12 +94,13 @@ def WL():
                                file_name=nomepdf,
                                mime='application/octet-stream')     
 
-        img_m= Image.open('m.png')
-        st.image(img_m, output_format="auto") 
+        
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
         img_c= Image.open('c.png')
         st.image(img_c, output_format="auto")
+        img_m= Image.open('m.png')
+        st.image(img_m, output_format="auto") 
 
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
 st.markdown("# Winston-Lutz 🎯")
