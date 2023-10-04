@@ -38,7 +38,8 @@ def WL():
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     unid = st.sidebar.selectbox('Unidade',('ELEKTA_IEC', 'VARIAN_IEC'))
-    names =st.slidebar.checkbox('Usar nome de arquivos')
+    names =st.sidebar.checkbox('Usar nome de arquivos')
+
     st.title('upload da imagens')
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
     if img_wl is not None:
