@@ -38,7 +38,7 @@ def WL():
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     unid = st.sidebar.selectbox('Unidade',('ELEKTA_IEC', 'VARIAN_IEC'))
-    names =st.sidebar.checkbox('Usar nome de arquivos')
+    names =st.sidebar.checkbox('Usar Nome de Arquivos')
 
     st.title('upload da imagens')
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
@@ -93,6 +93,61 @@ def WL():
                                data=PDFbyte,
                                file_name=nomepdf,
                                mime='application/octet-stream')     
+
+        
+
+        t=[[],[],[],[],[],[]]
+        soma=[0,0,0,0,0,0]
+
+        for i in range(len(wl.images)):
+            G = wl.images[i].gantry_angle
+            C = wl.images[i].collimator_angle
+            M = wl.images[i].couch_angle
+            xV = wl.images[i].cax2bb_vector.x
+            yV = wl.images[i].cax2bb_vector.y
+            t[0].append(G)
+            t[1].append(C)
+            t[2].append(M)
+            if M != 0:
+                x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
+                y=(round(-xV*math.sin(math.radians(M))+yV*math.cos(math.radians(M)),4))
+                z="--"
+            elif G == 270 or G == 90:
+                x="--"
+                y=yV
+                z=(round(-xV*math.sin(math.radians(G)),4))
+            else:
+                x=(round(xV,3))
+                y=yV
+                z="--"
+            t[3].append(x)
+            t[4].append(y)
+            t[5].append(z)
+
+            if x != "--":
+                soma[0]+=x
+                soma[1]+=1
+            soma[2]+=y
+            soma[3]+=1
+            if z != "--":
+                soma[4]+=z
+                soma[5]+=1
+        t[0].append("--")
+        t[1].append("--")
+        t[2].append("Média")
+        t[3].append(round(soma[0]/soma[1],4))
+        t[4].append(soma[2]/soma[3])
+        t[5].append(soma[4]/soma[5])
+
+        st.write(pd.DataFrame({
+        'Gantry': t[0],
+        'Colimador': t[1],
+        'Mesa': t[2],
+        'LAT x (mm)': t[3],
+        'LONG y (mm)': t[4],
+        'VERT z (mm)': t[5]
+        
+        }))
 
         
         img_g= Image.open('g.png')
