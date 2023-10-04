@@ -33,13 +33,17 @@ def WL():
     #    'first column': [1, 2, 3, 4],
     #    'second column': [15, 25, 30, 40]
     #}))
+    a=[0,1,3,4,6]
+    st.write(a)
 
-    tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
-    r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
+    #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
+    #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
+    unid = st.sidebar.selectbox('Unidade',('ELEKTA_IEC', 'VARIAN_IEC'))
     st.title('upload da imagens')
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
     if img_wl is not None:
         wl = WinstonLutz(img_wl,use_filenames=True)
+        machine='MachineScale.'+ unid
         wl.analyze(bb_size_mm=5, machine_scale=MachineScale.ELEKTA_IEC)
         data = wl.results_data()
         #if data.passed:
@@ -65,7 +69,7 @@ def WL():
         #today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'WL_' + Unit + data_teste +'.pdf'
+        nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
