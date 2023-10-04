@@ -19,7 +19,7 @@ import pandas as pd
 from PIL import Image
 from datetime import date
 from fpdf import FPDF
-from tabulate import tabulate
+import math
 
 from pylinac.winston_lutz import WinstonLutz, MachineScale
 
@@ -145,9 +145,8 @@ def WL():
         'Mesa': t[2],
         'LAT x (mm)': t[3],
         'LONG y (mm)': t[4],
-        'VERT z (mm)': t[5]
-        
-        }))
+        'VERT z (mm)': t[5],
+        },hide_index=True))
 
         
         img_g= Image.open('g.png')
