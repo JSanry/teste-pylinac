@@ -139,7 +139,7 @@ def WL():
         t[4].append(soma[2]/soma[3])
         t[5].append(soma[4]/soma[5])
 
-        st.write(pd.DataFrame({
+        tb = pd.DataFrame({
         'Gantry': t[0],
         'Colimador': t[1],
         'Mesa': t[2],
@@ -148,7 +148,8 @@ def WL():
         'VERT z (mm)': t[5],
         },hide_index=True))
 
-        
+        st.dataframe(tb,hide_index=True)
+
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
         img_c= Image.open('c.png')
