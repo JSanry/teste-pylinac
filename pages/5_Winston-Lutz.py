@@ -101,7 +101,10 @@ def WL():
             t[1].append(round(C,1))
             t[2].append(round(M,1))
             if M != 0:
-                x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
+                if unid == 'VARIAN_IEC':    #coordenadas VARIAN 
+                    x=(round(-xV*math.cos(math.radians(M))-yV*math.sin(math.radians(M)),4))
+                else:   #coordenadas ELEKTA
+                    x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
                 y=(round(-xV*math.sin(math.radians(M))+yV*math.cos(math.radians(M)),4))
                 z="--"
             elif G == 270 or G == 90:
