@@ -6,6 +6,7 @@ from PIL import Image
 from datetime import date
 from fpdf import FPDF
 
+import pylinac.picketfence
 from pylinac.picketfence import PicketFence, MLCArrangement, MLC
 
 import streamlit as st
