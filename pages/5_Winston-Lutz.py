@@ -33,7 +33,7 @@ def WL():
 
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=5.0, value=2.0)
-    unid = st.sidebar.selectbox('Unidade',('ELEKTA', 'VARIAN'))
+    unid = st.sidebar.selectbox('Unidade',('VARIAN', 'ELEKTA'))
     names =st.sidebar.checkbox('Usar Nome de Arquivos')
 
     st.title('Upload da Imagens')
@@ -135,8 +135,6 @@ def WL():
         t[4].append(round(soma[2]/soma[3],2))
         t[5].append(round(soma[4]/soma[5],2))
 
-        
-
         tb = pd.DataFrame({
         'Gantry': t[0],
         'Colimador': t[1],
@@ -155,9 +153,7 @@ def WL():
         img_m= Image.open('m.png')
         st.image(img_m, output_format="auto") 
 
-           
-
-
+    
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
 st.markdown("# Winston-Lutz 🎯")
 st.sidebar.header("Winston-Lutz")
