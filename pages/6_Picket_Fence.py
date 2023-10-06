@@ -24,7 +24,7 @@ def PicketFence():
     st.title('upload da imagem')
     pf_img = st.file_uploader('upload')
     if pf_img is not None:
-        pf = PicketFence(pfimg, mlc=MLC.MILLENNIUM)
+        pf = PicketFence(pf_img, mlc=MLC.MILLENNIUM)
         #pf = PicketFence(pf_img)
         pf.analyze(tolerance=tol, action_tolerance=a_tol, orientation=orient)
         #st.write(my_star.results())
