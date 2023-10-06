@@ -41,7 +41,7 @@ def WL():
     if img_wl is not None:
         wl = WinstonLutz(img_wl,use_filenames=names)
         machine='MachineScale.'+ unid
-        wl.analyze(bb_size_mm=bib_size, machine_scale=machine
+        wl.analyze(bb_size_mm=bib_size, machine_scale=machine)
         data = wl.results_data()
         #if data.passed:
             #st.markdown("### Resultado Passou ")
