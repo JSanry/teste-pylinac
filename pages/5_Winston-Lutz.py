@@ -35,6 +35,7 @@ def WL():
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=5.0, value=2.0)
     unid = st.sidebar.selectbox('Unidade',('VARIAN', 'ELEKTA'))
     names =st.sidebar.checkbox('Usar Nome de Arquivos')
+    col =st.sidebar.checkbox('Imagens Colimador')
 
     st.title('Upload da Imagens')
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
@@ -148,8 +149,9 @@ def WL():
 
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
-        img_c= Image.open('c.png')
-        st.image(img_c, output_format="auto")
+        if col:
+            img_c= Image.open('c.png')
+            st.image(img_c, output_format="auto")
         img_m= Image.open('m.png')
         st.image(img_m, output_format="auto") 
 
