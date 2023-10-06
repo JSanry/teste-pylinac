@@ -81,7 +81,8 @@ def WL():
                                mime='application/octet-stream')  
 
         wl.save_images("g.png", axis='Gantry')
-        #wl.save_images("c.png",axis='Collimator')
+        if col:
+            wl.save_images("c.png",axis='Collimator')
         wl.save_images("m.png", axis='Couch')
         wl.save_summary("s.png")
         
@@ -149,9 +150,8 @@ def WL():
 
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
-        if col:
-            img_c= Image.open('c.png')
-            st.image(img_c, output_format="auto")
+        img_c= Image.open('c.png')
+        st.image(img_c, output_format="auto")
         img_m= Image.open('m.png')
         st.image(img_m, output_format="auto") 
 
