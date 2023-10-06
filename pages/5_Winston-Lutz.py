@@ -80,7 +80,7 @@ def WL():
                                mime='application/octet-stream')  
 
         wl.save_images("g.png", axis='Gantry')
-        wl.save_images("c.png",axis='Collimator')
+        #wl.save_images("c.png",axis='Collimator')
         wl.save_images("m.png", axis='Couch')
         wl.save_summary("s.png")
         
