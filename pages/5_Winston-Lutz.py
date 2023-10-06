@@ -32,7 +32,7 @@ def WL():
     #st.write("Here's our first attempt at using data to create a table:")
 
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
-    bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.05,format="%.2f",min_value=0.19, max_value=1.0, value=0.4)
+    bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.05,format="%.2f",min_value=0.1, max_value=5.0, value=2)
     unid = st.sidebar.selectbox('Unidade',('ELEKTA_IEC', 'VARIAN_IEC'))
     names =st.sidebar.checkbox('Usar Nome de Arquivos')
 
