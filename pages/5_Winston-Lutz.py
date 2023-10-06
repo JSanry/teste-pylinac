@@ -41,7 +41,7 @@ def WL():
     if img_wl is not None:
         wl = WinstonLutz(img_wl,use_filenames=names)
         mach='MachineScale.'+ unid
-        wl.analyze(bb_size_mm=bib_size, machine_scale=mach)
+        wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.ELEKTA_IEC)
         data = wl.results_data()
         #if data.passed:
             #st.markdown("### Resultado Passou ")
@@ -83,6 +83,8 @@ def WL():
         
         img_s= Image.open('s.png')
         st.image(img_s, output_format="auto")
+
+        st.write(wl.bb_shift_instructions())
         
         t=[[],[],[],[],[],[]]
         soma=[0,0,0,0,0,0]
@@ -130,7 +132,7 @@ def WL():
         t[4].append(round(soma[2]/soma[3],2))
         t[5].append(round(soma[4]/soma[5],2))
 
-        st.write(wl.bb_shift_instructions())
+        
 
         tb = pd.DataFrame({
         'Gantry': t[0],
