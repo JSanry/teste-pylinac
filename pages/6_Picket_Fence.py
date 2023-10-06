@@ -39,7 +39,7 @@ def PicketFence():
         #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
         
         pf.save_analyzed_image("pf.png")
-        img_res= Image.open('mystar.png')
+        img_res= Image.open('pf.png')
         st.image(img_res, output_format="auto")
 
         # Cria MLC Millennium80
@@ -70,7 +70,7 @@ def PicketFence():
         today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'StarShot_' + Unit + Par + data_teste +'.pdf'
+        nomepdf = 'PF_' + Unit + Par + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
