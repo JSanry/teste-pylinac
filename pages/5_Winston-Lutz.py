@@ -102,7 +102,7 @@ def WL():
             t[1].append(round(C,1))
             t[2].append(round(M,1))
             if M != 0:
-                if unid == 'VARIAN_IEC':    #coordenadas VARIAN 
+                if unid == 'VARIAN':    #coordenadas VARIAN 
                     x=(round(-xV*math.cos(math.radians(M))-yV*math.sin(math.radians(M)),4))
                 else:   #coordenadas ELEKTA
                     x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
