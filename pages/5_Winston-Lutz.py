@@ -40,8 +40,8 @@ def WL():
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
     if img_wl is not None:
         wl = WinstonLutz(img_wl,use_filenames=names)
-        machine='MachineScale.'+ unid
-        wl.analyze(bb_size_mm=bib_size, machine_scale=machine)
+        mach='MachineScale.'+ unid
+        wl.analyze(bb_size_mm=bib_size, machine_scale=mach)
         data = wl.results_data()
         #if data.passed:
             #st.markdown("### Resultado Passou ")
@@ -83,10 +83,6 @@ def WL():
         
         img_s= Image.open('s.png')
         st.image(img_s, output_format="auto")
-
-        
-        #img_star= Image.open('mystar.png')
-        #st.image(img_star, output_format="auto")
         
         t=[[],[],[],[],[],[]]
         soma=[0,0,0,0,0,0]
