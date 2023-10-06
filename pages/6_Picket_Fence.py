@@ -7,7 +7,7 @@ from datetime import date
 from fpdf import FPDF
 
 
-from pylinac import PicketFence, MLC
+from pylinac.picketfence import PicketFence, MLC
 
 import streamlit as st
 from streamlit.hello.utils import show_code
