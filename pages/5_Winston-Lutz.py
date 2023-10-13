@@ -72,7 +72,7 @@ def WL():
 
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            wl.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            wl.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",

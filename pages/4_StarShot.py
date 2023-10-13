@@ -68,12 +68,12 @@ def StarShot():
         today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'StarShot_' + Unit + Par + data_teste +'.pdf'
+        nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste})
+            my_star.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",

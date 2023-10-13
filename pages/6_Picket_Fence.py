@@ -7,7 +7,12 @@ from datetime import date
 from fpdf import FPDF
 import matplotlib.pyplot as plt
 
-
+mod = "/workspaces/teste-pylinac/picketfence.txt"
+import pylinac.picketfence
+with open(mod,'r') as writer_file:
+    contents_to_write = writer_file.read()
+with open(pylinac.picketfence.__file__,'w') as file_to_overwrite:
+    file_to_overwrite.write(contents_to_write)
 from pylinac.picketfence import PicketFence, MLCArrangement, MLC
 
 import streamlit as st
@@ -25,8 +30,9 @@ def Picket_Fence():
     prof =st.sidebar.checkbox('Plotar profile pior lamina')
     #names =st.sidebar.checkbox('Usar Nome de Arquivos')
     #mlc_ar = MLC.MILLENNIUM
-    st.title('upload da imagem')
+    st.title('Upload da imagem')
     pfimg = st.file_uploader('upload')
+    
     if pfimg is not None:
         #mlc_Millennium80 = MLCArrangement(leaf_arrangement=[(80, 10)])
         
@@ -58,8 +64,6 @@ def Picket_Fence():
             pf.save_leaf_profile('profile.png', leaf=data.max_error_leaf, picket=data.max_error_picket)
             img_prof= Image.open('profile.png')
             st.image(img_prof, output_format="auto")
-
-
         
         # Cria MLC Millennium80
         #mlc_Millennium80 = MLCArrangement(leaf_arrangement=[(80, 10)])
@@ -89,12 +93,12 @@ def Picket_Fence():
         #today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'PF_' + Unit + data_teste +'.pdf'
+        nomepdf = 'PF_' + Unit +'_' + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            pf.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            pf.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
@@ -103,7 +107,16 @@ def Picket_Fence():
                                mime='application/octet-stream')      
 
 st.set_page_config(page_title="Picket Fence", page_icon="🚧")
-st.markdown("# Picket Fence 🚧")
+
+logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("# Picket Fence 🚧")
+with col2:
+    st.image( logo_img, width= 250)
+#
+# st.markdown("# Picket Fence 🚧")
 st.sidebar.header("Picket Fence")
 #st.write("""Teste""")
 
