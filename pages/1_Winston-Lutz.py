@@ -158,7 +158,7 @@ def WL():
     
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
 
-logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
 
 col1, col2 = st.columns(2)
 with col1:
