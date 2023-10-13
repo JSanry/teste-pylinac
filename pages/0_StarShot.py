@@ -73,7 +73,7 @@ def Star_Shot():
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            my_star.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste})
+            my_star.publish_pdf(filename="res.pdf",open_file=False, logo="/mount/src/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
@@ -83,9 +83,13 @@ def Star_Shot():
             #teste
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 
-#logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
 
-st.markdown("# StarShot 🎇")
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("# StarShot 🎇")
+with col2:
+    st.image( logo_img, width= 250)
 
 
 st.sidebar.header("StarShot")

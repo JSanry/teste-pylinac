@@ -97,7 +97,7 @@ def Picket_Fence():
         with col4:    
             if printpdf:
                 #img_logo= Image.open('logoinrad.png')
-                pf.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+                pf.publish_pdf(filename="res.pdf",open_file=False, logo="/mount/src/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
                 with open("res.pdf", "rb") as pdf_file:
                     PDFbyte = pdf_file.read()
                 st.download_button(label="Download PDF",
@@ -107,7 +107,7 @@ def Picket_Fence():
 
 st.set_page_config(page_title="Picket Fence", page_icon="🚧")
 
-logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
 
 col1, col2 = st.columns(2)
 with col1:
