@@ -27,7 +27,7 @@ from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def StarShot():
+def Star_Shot():
     #st.write("Here's our first attempt at using data to create a table:")
     #st.write(pd.DataFrame({
     #    'first column': [1, 2, 3, 4],
@@ -80,20 +80,16 @@ def StarShot():
                                data=PDFbyte,
                                file_name=nomepdf,
                                mime='application/octet-stream')      
-
+            #teste
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 
-logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+#logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 
-col1, col2 = st.columns(2)
-with col1:
-    st.markdown("# StarShot 🎇")
-with col2:
-    st.image( logo_img, width= 250)
+st.markdown("# StarShot 🎇")
+
 
 st.sidebar.header("StarShot")
-#st.write("""Teste""")
 
-StarShot()
+Star_Shot()
 
-show_code(StarShot)
+show_code(Star_Shot)

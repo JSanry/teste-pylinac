@@ -29,7 +29,6 @@ def run():
 
     #st.image(image, caption='Sunrise by the mountains')
     st.write("# Welcome to Streamlit! 👋")
-
     st.sidebar.success("Selecione Testes Acima")
 
     st.markdown(
