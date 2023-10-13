@@ -36,7 +36,7 @@ def StarShot():
 
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
-    st.title('upload da imagem')
+    st.title('Upload da imagem')
     star_img = st.file_uploader('upload')
     if star_img is not None:
         my_star = Starshot(star_img, dpi=100, sid=1000)
@@ -73,7 +73,7 @@ def StarShot():
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par})
+            my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",

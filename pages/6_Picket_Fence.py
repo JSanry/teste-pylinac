@@ -5,27 +5,37 @@ import pandas as pd
 from PIL import Image
 from datetime import date
 from fpdf import FPDF
+import matplotlib.pyplot as plt
 
 
-from pylinac.picketfence import PicketFence, MLC
+from pylinac.picketfence import PicketFence, MLCArrangement, MLC
 
 import streamlit as st
 from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def PicketFence():
+def Picket_Fence():
 
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.05, max_value=1.5, value=0.15)
     a_tol = st.sidebar.number_input(label='Ação de Tolerancia',step=0.05,format="%.2f",min_value=0.05, max_value=1.5, value=0.1)
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     orient = st.sidebar.selectbox('Orientação',('Left-Right', 'Up-Down'))
+    mlc = st.sidebar.selectbox('MLC',('Millennium80', 'Millennium'))
+    prof =st.sidebar.checkbox('Plotar profile pior lamina')
     #names =st.sidebar.checkbox('Usar Nome de Arquivos')
     #mlc_ar = MLC.MILLENNIUM
     st.title('upload da imagem')
-    pf_img = st.file_uploader('upload')
-    if pf_img is not None:
-        pf = PicketFence(pf_img, mlc=MLC.MILLENNIUM)
+    pfimg = st.file_uploader('upload')
+    if pfimg is not None:
+        #mlc_Millennium80 = MLCArrangement(leaf_arrangement=[(80, 10)])
+        
+        if mlc== 'Millennium80':
+            mlc_setup= MLCArrangement(leaf_arrangement=[(80, 10)])
+        elif mlc == 'Millennium':
+            mlc_setup= MLC.MILLENNIUM
+        
+        pf = PicketFence(pfimg, mlc=mlc_setup )
         #pf = PicketFence(pf_img)
         pf.analyze(tolerance=tol, action_tolerance=a_tol, orientation=orient)
         #st.write(my_star.results())
@@ -35,13 +45,22 @@ def PicketFence():
         else:
             st.markdown("### Resultado Não Passou! ")
            
-        st.write("Porcentagem laminas passando" , "%.3f" %data.percent_leaves_passing, "mm")
+        st.write("Porcentagem laminas passando:" , "%.3f" %data.percent_leaves_passing, "mm")
+        st.write("Erro absoluto médio:" , "%.3f" %data.absolute_median_error_mm, "mm")
+        st.write("O erro máximo é:" , "%.3f" %data.max_error_mm, "mm, na lamina", "%.0f" %data.max_error_leaf, " no picket", "%.0f" %data.max_error_picket)
         #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
         
         pf.save_analyzed_image("pf.png")
         img_res= Image.open('pf.png')
         st.image(img_res, output_format="auto")
 
+        if prof:
+            pf.save_leaf_profile('profile.png', leaf=data.max_error_leaf, picket=data.max_error_picket)
+            img_prof= Image.open('profile.png')
+            st.image(img_prof, output_format="auto")
+
+
+        
         # Cria MLC Millennium80
         #mlc_Millennium80 = MLCArrangement(leaf_arrangement=[(80, 10)])
 
@@ -67,15 +86,15 @@ def PicketFence():
             Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
 
 
-        today = date.today()
+        #today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'PF_' + Unit + Par + data_teste +'.pdf'
+        nomepdf = 'PF_' + Unit + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            pf.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit})
+            pf.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
@@ -83,11 +102,11 @@ def PicketFence():
                                file_name=nomepdf,
                                mime='application/octet-stream')      
 
-st.set_page_config(page_title="Picket Fence", page_icon="🎇")
-st.markdown("# Picket Fence 🎇")
+st.set_page_config(page_title="Picket Fence", page_icon="🚧")
+st.markdown("# Picket Fence 🚧")
 st.sidebar.header("Picket Fence")
 #st.write("""Teste""")
 
-PicketFence()
+Picket_Fence()
 
-show_code(PicketFence)
+show_code(Picket_Fence)
