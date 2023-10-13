@@ -82,7 +82,15 @@ def StarShot():
                                mime='application/octet-stream')      
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
-st.markdown("# StarShot 🎇")
+
+logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("# StarShot 🎇")
+with col2:
+    st.image( logo_img, width= 250)
+
 st.sidebar.header("StarShot")
 #st.write("""Teste""")
 

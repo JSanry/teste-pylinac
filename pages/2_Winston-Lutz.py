@@ -157,7 +157,15 @@ def WL():
 
     
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
-st.markdown("# Winston-Lutz 🎯")
+
+logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("# Winston-Lutz 🎯")
+with col2:
+    st.image( logo_img, width= 250)
+
 st.sidebar.header("Winston-Lutz")
 #st.write("""Teste""")
 
