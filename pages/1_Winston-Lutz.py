@@ -72,7 +72,7 @@ def WL():
 
         if printpdf:
             #img_logo= Image.open('logoinrad.png')
-            wl.publish_pdf(filename="res.pdf",open_file=False, logo="/mount/src/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            wl.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
@@ -158,12 +158,12 @@ def WL():
     
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
 
-logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
+logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 
-col1, col2 = st.columns(2)
-with col1:
+colx, coly = st.columns(2)
+with colx:
     st.markdown("# Winston-Lutz 🎯")
-with col2:
+with coly:
     st.image( logo_img, width= 250)
 
 st.sidebar.header("Winston-Lutz")
