@@ -111,13 +111,12 @@ st.set_page_config(page_title="Picket Fence", page_icon="🚧")
 #logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 #https://github.com/JSanry/teste-pylinac/blob/EXT/logoinrad.png
 htp="https://raw.githubusercontent.com/JSanry/teste-pylinac/blob/EXT/logoinrad.png" 
-st.image(htp, width=350)
 colq, colw = st.columns(2)
 with colq:
     st.markdown("# Picket Fence 🚧")
 with colw:
-    #st.image( logo_img, width= 250)
-    st.markdown("# Picket Fence 🚧")
+    st.image( htp, width= 250)
+  
 
 st.sidebar.header("Picket Fence")
 #st.write("""Teste""")
