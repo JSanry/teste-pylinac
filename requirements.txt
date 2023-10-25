@@ -6,3 +6,4 @@ streamlit
 pylinac
 fpdf
 datetime
+pyodbc
