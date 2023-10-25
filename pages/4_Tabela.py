@@ -18,10 +18,10 @@ def Tabela():
 
     # Create a connection object.
     conn = st.experimental_connection("gsheets", type=GSheetsConnection)
-
+    url = "https://docs.google.com/spreadsheets/d/1P5ggeEabQ3_WhO8io1RFwt1UBCJhw1oZzuw9TKfNi-k/edit#gid=0"
     #df = conn.read()
     df = conn.read(
-    worksheet="database",
+    spreadsheet= url,
     ttl="10m",
     usecols=[0, 1],
     nrows=3,
