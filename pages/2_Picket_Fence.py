@@ -107,14 +107,16 @@ def Picket_Fence():
 
 st.set_page_config(page_title="Picket Fence", page_icon="🚧")
 
-logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
+#logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
 #logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
-
+htp="https://raw.githubusercontent.com/djswoosh/Music-Recommendation-Engine-using-FMA-Dataset/main/1200px-The_Echo_Nest_logo.svg.png" 
+st.image(htp, caption= 'logo', width=350)
 colq, colw = st.columns(2)
 with colq:
     st.markdown("# Picket Fence 🚧")
 with colw:
-    st.image( logo_img, width= 250)
+    #st.image( logo_img, width= 250)
+    st.markdown("# Picket Fence 🚧")
 
 st.sidebar.header("Picket Fence")
 #st.write("""Teste""")
