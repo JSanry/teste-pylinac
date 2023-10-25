@@ -11,12 +11,12 @@ import requests
 
 #mod = "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/picketfence.txt"
 #mod_text = requests.get(mod)
-mod = "/mount/src/teste-pylinac/picketfence.txt"
-import pylinac.picketfence
-with open(mod,'r') as writer_file:
-    contents_to_write = writer_file.read()
-with open(pylinac.picketfence.__file__,'w') as file_to_overwrite:
-    file_to_overwrite.write(contents_to_write)
+#mod = "/mount/src/teste-pylinac/picketfence.txt"
+#import pylinac.picketfence
+#with open(mod,'r') as writer_file:
+#    contents_to_write = writer_file.read()
+#with open(pylinac.picketfence.__file__,'w') as file_to_overwrite:
+#    file_to_overwrite.write(contents_to_write)
 from pylinac.picketfence import PicketFence, MLCArrangement, MLC
 
 import streamlit as st
