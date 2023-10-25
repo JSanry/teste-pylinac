@@ -97,7 +97,7 @@ def Picket_Fence():
         with col4:    
             if printpdf:
                 #img_logo= Image.open('logoinrad.png')
-                pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/blob/EXT/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+                pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
                 with open("res.pdf", "rb") as pdf_file:
                     PDFbyte = pdf_file.read()
                 st.download_button(label="Download PDF",
