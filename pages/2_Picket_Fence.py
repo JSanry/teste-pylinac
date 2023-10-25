@@ -8,7 +8,7 @@ from fpdf import FPDF
 import matplotlib.pyplot as plt
 
 
-mod = "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/picketfence.txt"
+mod = 'https://raw.githubusercontent.com/JSanry/teste-pylinac/main/picketfence.txt'
 #mod = "/mount/src/teste-pylinac/picketfence.txt"
 import pylinac.picketfence
 with open(mod,'r') as writer_file:
