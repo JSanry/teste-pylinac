@@ -7,4 +7,4 @@ pylinac
 fpdf
 datetime
 pyodbc
-streamlit-gsheets
+st-gsheets-connection

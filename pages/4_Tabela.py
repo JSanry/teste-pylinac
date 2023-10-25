@@ -19,7 +19,13 @@ def Tabela():
     # Create a connection object.
     conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 
-    df = conn.read()
+    #df = conn.read()
+    df = conn.read(
+    worksheet="database",
+    ttl="10m",
+    usecols=[0, 1],
+    nrows=3,
+)
 
     # Print results.
     for row in df.itertuples():
