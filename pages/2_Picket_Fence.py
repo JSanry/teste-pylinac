@@ -14,7 +14,7 @@ mod = "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/picketfence.t
 mod_text = requests.get(mod)
 #mod = "/mount/src/teste-pylinac/picketfence.txt"
 import pylinac.picketfence
-with open(mod_test,'r') as writer_file:
+with open(mod_text,'r') as writer_file:
     contents_to_write = writer_file.read()
 with open(pylinac.picketfence.__file__,'w') as file_to_overwrite:
     file_to_overwrite.write(contents_to_write)
