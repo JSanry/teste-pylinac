@@ -52,16 +52,8 @@ def FA():
     st.title('Upload da imagem')
     img_F = st.file_uploader('upload')
     
-    if img_F is None and not fff:
-        fa = FieldAnalysis.from_demo_image()
-    elif img_F is None and fff:
-        fa = DeviceFieldAnalysis.from_demo_image()  
-
-    else:
+    if img_F is not None:  
         fa=FieldAnalysis(img_F)
-    
-    if fa is not None:  
-        
         fa.analyze(
         protocol=var_protocolo,
         centering=Centering.BEAM_CENTER,
@@ -119,9 +111,9 @@ def FA():
         s_img =st.checkbox('Imagens Separadas')
         split= s_img
 
-        fa.save_analyzed_image("r_img.png", split_plots= split)
+        fa.save_analyzed_image("r_img.png", split_plots = split)
    
-        if not s_img:
+        if not split:
            img_res= Image.open('r_img.png')
            st.image(img_res, output_format="auto")
         
