@@ -140,14 +140,14 @@ def Field_Analysis():
                                 file_name=nomepdf,
                                 mime='application/octet-stream')      
 
-st.set_page_config(page_title="Field Analysis", page_icon="🚧")
+st.set_page_config(page_title="Field Analysis", page_icon="🔲")
 
 htp= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png"
 #logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 
 colq, colw = st.columns(2)
 with colq:
-    st.markdown("# Field Analysis 🚧")
+    st.markdown("# Field Analysis 🔲")
 with colw:
     st.image( htp, width= 250)
 
