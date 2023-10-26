@@ -132,7 +132,7 @@ def Field_Analysis():
         with colb:    
             if printpdf:
                 #img_logo= Image.open('logoinrad.png')
-                my_img.publish_pdf(filename="res.pdf",open_file=False, logo="/workspaces/teste-pylinac/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
+                my_img.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
                 with open("res.pdf", "rb") as pdf_file:
                     PDFbyte = pdf_file.read()
                 st.download_button(label="Download PDF",
@@ -142,14 +142,14 @@ def Field_Analysis():
 
 st.set_page_config(page_title="Field Analysis", page_icon="🚧")
 
-#logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
-logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
+htp= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png"
+#logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 
 colq, colw = st.columns(2)
 with colq:
     st.markdown("# Field Analysis 🚧")
 with colw:
-    st.image( logo_img, width= 250)
+    st.image( htp, width= 250)
 
 st.sidebar.header("Field Analysis")
 #st.write("""Teste""")
