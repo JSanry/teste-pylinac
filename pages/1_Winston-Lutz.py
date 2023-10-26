@@ -47,13 +47,6 @@ def WL():
             wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.ELEKTA_IEC)
         data = wl.results_data()
         
-        #if data.passed:
-            #st.markdown("### Resultado Passou ")
-        #else:
-            #st.markdown("### Resultado Não Passou! ")
-           
-        #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
-        #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
 
         st.title('Defenições PDF')
         
