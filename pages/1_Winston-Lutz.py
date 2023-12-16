@@ -110,14 +110,15 @@ def WL():
                     x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
                 y=(round(-xV*math.sin(math.radians(M))+yV*math.cos(math.radians(M)),4))
                 z="--"
-            elif G == 270 or G == 90:
-                x="--"
+            #elif G == 270 or G == 90:
+            else:
+                x=(round(-xV*math.cos(math.radians(G)),4))
                 y=yV
                 z=(round(-xV*math.sin(math.radians(G)),4))
-            else:
-                x=(round(xV,3))
-                y=yV
-                z="--"
+            #else:
+            #    x=(round(xV,3))
+            #    y=yV
+            #    z="--"
             t[3].append(x)
             t[4].append(y)
             t[5].append(z)
