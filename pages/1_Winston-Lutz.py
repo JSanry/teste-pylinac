@@ -123,12 +123,12 @@ def WL():
             t[4].append(y)
             t[5].append(z)
 
-            if x != "--":
+            if x != "--" or x != 0:
                 soma[0]+=x
                 soma[1]+=1
             soma[2]+=y
             soma[3]+=1
-            if z != "--":
+            if z != "--" or z != 0:
                 soma[4]+=z
                 soma[5]+=1
         t[0].append("--")
