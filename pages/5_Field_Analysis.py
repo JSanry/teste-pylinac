@@ -108,27 +108,29 @@ def FA():
                                 file_name=nomepdf,
                                 mime='application/octet-stream')      
                 
-        s_img =st.checkbox('Imagens Separadas')
-        split= s_img
+        #s_img =st.checkbox('Imagens Separadas')
+        #split= s_img
 
-        fa.save_analyzed_image("r_img.png", split_plots = split)
-   
-        if not split:
-           img_res= Image.open('r_img.png')
-           st.image(img_res, output_format="auto")
+        fa.save_analyzed_image("r_img.png", split_plots = False)
         
-        else:
-            img_res1= Image.open('r_imgHorizontal Profile.png')
-            img_res2= Image.open('r_imgVertical Profile.png')
-            img_res3= Image.open('r_imgImage.png')
+        img_res= Image.open('r_img.png')
+        st.image(img_res, output_format="auto")
+        #if not split:
+        #   img_res= Image.open('r_img.png')
+        #   st.image(img_res, output_format="auto")
+        
+        #else:
+        #    img_res1= Image.open('r_imgHorizontal Profile.png')
+        #    img_res2= Image.open('r_imgVertical Profile.png')
+        #    img_res3= Image.open('r_imgImage.png')
 
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.image(img_res1, output_format="auto")
-            with col2:
-                st.image(img_res2, output_format="auto")
-            with col3:
-                st.image(img_res3, output_format="auto")     
+            #col1, col2, col3 = st.columns(3)
+            #with col1:
+                #st.image(img_res1, output_format="auto")
+            #with col2:
+             #   st.image(img_res2, output_format="auto")
+            #with col3:
+             #   st.image(img_res3, output_format="auto")     
 
 
 st.set_page_config(page_title="Field Analysis", page_icon="🔲")
