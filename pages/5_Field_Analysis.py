@@ -77,6 +77,13 @@ def FA():
              st.write("Simetria Vertical:" , "%.3f" %data.protocol_results["symmetry_vertical"])
              st.write("Simetria Horizontal:" , "%.3f" %data.protocol_results["symmetry_horizontal"]) 
     
+        
+        fa.save_analyzed_image("fa.png", split_plots = False)
+        img_res= Image.open('fa.png')
+        st.image(img_res, output_format="auto")
+        
+        
+        
         st.title('Defenições PDF')
         
         col1, col2, col3, col4 = st.columns(4)
@@ -111,10 +118,7 @@ def FA():
         #s_img =st.checkbox('Imagens Separadas')
         #split= s_img
 
-        fa.save_analyzed_image("r_img.png", split_plots = False)
         
-        img_res= Image.open('r_img.png')
-        st.image(img_res, output_format="auto")
         #if not split:
         #   img_res= Image.open('r_img.png')
         #   st.image(img_res, output_format="auto")
