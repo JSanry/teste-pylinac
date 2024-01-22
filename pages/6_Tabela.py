@@ -24,15 +24,23 @@ def Tabela():
         "Other",
     ]
 
+    teste_dados = st.selectbox(
+        "Escolha o teste",
+        [
+            "Teste",
+            "Star",
+        ],
+    )
+
     # Establishing a Google Sheets connection
     conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Fetch existing vendors data
-    existing_data = conn.read(worksheet="Teste", usecols=list(range(4)), ttl=5)
+    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(4)), ttl=5)
     existing_data = existing_data.dropna(how="all")
 
     action = st.selectbox(
-        "Choose an Action",
+        "Escolha uma ação",
         [
             "Dados novo teste",
             "Ver todos dados",
@@ -70,7 +78,7 @@ def Tabela():
                         ]
                     )
                     updated_df = pd.concat([existing_data, teste_data], ignore_index=True)
-                    conn.update(worksheet="Teste", data=updated_df)
+                    conn.update(worksheet=teste_dados, data=updated_df)
                     st.success("Registro feito!")
 
     # View All Vendors
@@ -88,7 +96,7 @@ def Tabela():
                 existing_data[existing_data["Teste"] == test_to_delete].index,
                 inplace=True,
             )
-            conn.update(worksheet="Teste", data=existing_data)
+            conn.update(worksheet=teste_dados, data=existing_data)
             st.success("Teste deletado!")
 
 st.sidebar.header("Tabela")
