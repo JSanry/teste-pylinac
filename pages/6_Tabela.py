@@ -25,7 +25,7 @@ def Tabela():
     ]
 
     # Establishing a Google Sheets connection
-    conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+    conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Fetch existing vendors data
     existing_data = conn.read(worksheet="Teste", usecols=list(range(4)), ttl=5)
