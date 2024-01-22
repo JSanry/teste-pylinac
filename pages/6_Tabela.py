@@ -42,8 +42,9 @@ def Tabela():
     action = st.selectbox(
         "Escolha uma ação",
         [
-            "Dados novo teste",
+        
             "Ver todos dados",
+            "Dados novo teste",
             "Deletar dado",
         ],
     )
