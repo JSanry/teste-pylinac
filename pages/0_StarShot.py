@@ -67,11 +67,13 @@ def Star_Shot():
             Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'),index= None)
         with col3:
             Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
-
-        today = date.today()
-        dia = st.date_input("Data de realização do teste:", value= date.today())    
-        data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
+        if not Unit or not Par or not Fis:
+            st.warning("Preencher campos de registro faltantes")
+        else:
+            today = date.today()
+            dia = st.date_input("Data de realização do teste:", value= date.today())    
+            data_teste = dia.strftime("%d_%m_%Y")
+            nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
@@ -93,9 +95,9 @@ def Star_Shot():
         existing_data = existing_data.dropna(how="all")
 
         #botao registro
-        submit_button = st.form_submit_button(label="Registrar dados")
+        registro_button = st.button("Registrar dados")
 
-        if submit_button:
+        if registro_button:
                 #checar se campos necessarios preenchidos
                 if not Unit or not Par or not Fis:
                     st.warning("Preencher campos de registro faltantes")
