@@ -108,7 +108,7 @@ def Star_Shot():
                     teste_data = pd.DataFrame(
                         [
                             {
-                                "Data": data_teste
+                                "Data": data_teste,
                                 "Parametro": Par,
                                 "Diametro":  "%.3f" %data.circle_diameter_mm,
                                 "RaioAnalise": r,
