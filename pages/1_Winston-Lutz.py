@@ -35,7 +35,7 @@ def WL():
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=5.0, value=2.0)
     unid = st.sidebar.selectbox('Unidade',('VARIAN', 'ELEKTA'))
     names =st.sidebar.checkbox('Usar Nome de Arquivos', value= True)
-    col =st.sidebar.checkbox('Imagens Colimador')
+    #col =st.sidebar.checkbox('Imagens Colimador')
 
     st.title('Upload da Imagens')
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
@@ -87,8 +87,7 @@ def WL():
                                mime='application/octet-stream')  
 
         wl.save_images("g.png", axis='Gantry')
-        if col:
-            wl.save_images("c.png",axis='Collimator')
+        wl.save_images("c.png",axis='Collimator')
         wl.save_images("m.png", axis='Couch')
         wl.save_summary("s.png")
         
@@ -97,6 +96,7 @@ def WL():
 
         st.write(wl.bb_shift_instructions())
         
+        #Calula e plota tabela deslocamentos cada imagem
         t=[[],[],[],[],[],[]]
         soma=[0,0,0,0,0,0]
 
