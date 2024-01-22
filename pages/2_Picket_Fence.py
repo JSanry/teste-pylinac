@@ -109,6 +109,7 @@ def Picket_Fence():
                 pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
                 with open("res.pdf", "rb") as pdf_file:
                     PDFbyte = pdf_file.read()
+                st.success("PDF Gerado")    
                 st.download_button(label="Download PDF",
                                 data=PDFbyte,
                                 file_name=nomepdf,
