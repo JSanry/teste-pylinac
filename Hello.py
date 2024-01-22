@@ -65,7 +65,7 @@ def run():
         ],
     )
 
-    col_testes = [("StarShot", 8), ("WinstonLutz",2),("PicketFence",2),("FieldAnalysis",2)]
+    col_testes = [("StarShot", int(8)), ("WinstonLutz",2),("PicketFence",2),("FieldAnalysis",2)]
     # Establishing a Google Sheets connection
     conn = st.connection("gsheets", type=GSheetsConnection)
 
