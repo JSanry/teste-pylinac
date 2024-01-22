@@ -78,9 +78,9 @@ def FA():
              st.write("Simetria Horizontal:" , "%.3f" %data.protocol_results["symmetry_horizontal"]) 
     
         
-        fa.save_analyzed_image("fa.png", split_plots = False)
-        img_res= Image.open('fa.png')
-        st.image(img_res, output_format="auto")
+       # fa.save_analyzed_image("fa.png", split_plots = False)
+       # img_res= Image.open('fa.png')
+       # st.image(img_res, output_format="auto")
         
         
         
