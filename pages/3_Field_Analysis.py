@@ -15,7 +15,7 @@ import pandas as pd
 from pylinac import FieldAnalysis, Protocol, Centering, Edge, Normalization, Interpolation, DeviceFieldAnalysis
 
 
-def Field_Analysis():
+def FA():
 
     protocol = st.sidebar.selectbox('Protocolo',('VARIAN', 'ELEKTA'))
     col_a, col_b = st.columns(2)
@@ -31,22 +31,11 @@ def Field_Analysis():
     edge = st.sidebar.selectbox('Detecção borda',('Inflexão Derivada', 'Inflexão Hill', 'FWHM'))
 
     fff =st.sidebar.checkbox('Campo FFF')
-    s_img =st.sidebar.checkbox('Imagens Separadas')
-   
-    st.title('Upload da imagem')
-   
-    my_img = st.file_uploader('upload')
-    
-    if my_img is None and not fff:
-        my_img = FieldAnalysis.from_demo_image()
-    elif my_img is None and fff:
-        my_img = DeviceFieldAnalysis.from_demo_image()  
 
-    #my_img = st.file_uploader('upload')
     if protocol=="VARIAN":
         var_protocolo= Protocol.VARIAN
     else:
-        var.protocolo= Protocol.ELEKTA
+        var_protocolo= Protocol.ELEKTA
 
     if interpol == "Linear":
         var_interpol= Interpolation.LINEAR
@@ -60,20 +49,22 @@ def Field_Analysis():
     else:
         var_edge = Edge.FWHM
 
-    if my_img is not None:
-
-        my_img.analyze(
+    st.title('Upload da imagem')
+    img_F = st.file_uploader('upload')
+    
+    if img_F is not None:  
+        fa=FieldAnalysis(img_F)
+        fa.analyze(
         protocol=var_protocolo,
         centering=Centering.BEAM_CENTER,
         penumbra=(a, b),
         interpolation=var_interpol,
         interpolation_resolution_mm= interpol_res,
-        edge_detection_method= var_edge,   #INFLECTION_DERIVATIVE melhor FFF, ou FWHM normal
+        edge_detection_method= var_edge,   
         is_FFF=fff,
-        in_field_ratio= ratio_field,
-        )
+        in_field_ratio= ratio_field)
 
-        data = my_img.results_data()
+        data = fa.results_data()
         
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -85,29 +76,13 @@ def Field_Analysis():
         with col3:
              st.write("Simetria Vertical:" , "%.3f" %data.protocol_results["symmetry_vertical"])
              st.write("Simetria Horizontal:" , "%.3f" %data.protocol_results["symmetry_horizontal"]) 
-
+    
+        
+       # fa.save_analyzed_image("fa.png", split_plots = False)
+       # img_res= Image.open('fa.png')
+       # st.image(img_res, output_format="auto")
         
         
-        
-        
-        my_img.save_analyzed_image("img.png",split_plots=s_img)
-
-        if not s_img:
-            img_res= Image.open('img.png')
-            st.image(img_res, output_format="auto")
-        else:
-            img_res1= Image.open('imgHorizontal Profile.png')
-            img_res2= Image.open('imgVertical Profile.png')
-            img_res3= Image.open('imgImage.png')
-
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.image(img_res1, output_format="auto")
-            with col2:
-                st.image(img_res2, output_format="auto")
-            with col3:
-                st.image(img_res3, output_format="auto")     
-
         
         st.title('Defenições PDF')
         
@@ -132,28 +107,49 @@ def Field_Analysis():
         with colb:    
             if printpdf:
                 #img_logo= Image.open('logoinrad.png')
-                my_img.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
+                fa.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
                 with open("res.pdf", "rb") as pdf_file:
                     PDFbyte = pdf_file.read()
                 st.download_button(label="Download PDF",
                                 data=PDFbyte,
                                 file_name=nomepdf,
                                 mime='application/octet-stream')      
+                
+        #s_img =st.checkbox('Imagens Separadas')
+        #split= s_img
+
+        
+        #if not split:
+        #   img_res= Image.open('r_img.png')
+        #   st.image(img_res, output_format="auto")
+        
+        #else:
+        #    img_res1= Image.open('r_imgHorizontal Profile.png')
+        #    img_res2= Image.open('r_imgVertical Profile.png')
+        #    img_res3= Image.open('r_imgImage.png')
+
+            #col1, col2, col3 = st.columns(3)
+            #with col1:
+                #st.image(img_res1, output_format="auto")
+            #with col2:
+             #   st.image(img_res2, output_format="auto")
+            #with col3:
+             #   st.image(img_res3, output_format="auto")     
+
 
 st.set_page_config(page_title="Field Analysis", page_icon="🔲")
 
-htp= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png"
-#logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 
+htp= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png"
 colq, colw = st.columns(2)
 with colq:
-    st.markdown("# Field Analysis 🔲")
+    st.markdown("# Field Analysis  🔲 ")
 with colw:
     st.image( htp, width= 250)
 
 st.sidebar.header("Field Analysis")
 #st.write("""Teste""")
 
-Field_Analysis()
+FA()
 
-show_code(Field_Analysis)
+show_code(FA)
