@@ -22,13 +22,13 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="TESTEPylinac",
+        page_title="TESTES Pylinac",
         page_icon="👋",
     )
     #image = Image.open('logoinrad.png')
 
     #st.image(image, caption='Sunrise by the mountains')
-    st.write("# Welcome to Streamlit! 👋")
+    st.write("# Welcome to Streamlit! 💾")
     st.sidebar.success("Selecione Testes Acima")
 
     st.markdown(
