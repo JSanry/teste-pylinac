@@ -117,7 +117,7 @@ def run():
 
     # View All Vendors
     elif action == "Ver todos dados":
-        st.dataframe(existing_data)
+        st.dataframe(existing_data,hide_index=True)
 
     # Delete Vendor
     elif action == "Deletar dado":
