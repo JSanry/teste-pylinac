@@ -46,8 +46,10 @@ def Star_Shot():
         else:
             st.markdown("### Resultado Não Passou! ")
 
-        #Resultados   
-        st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
+        #Resultados  
+        min_diametro = data.circle_diameter_mm  
+        #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
+        st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %min_diametro, "mm")
         st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
         
         #Mostra imagens
@@ -80,7 +82,8 @@ def Star_Shot():
             st.download_button(label="Download PDF",
                                data=PDFbyte,
                                file_name=nomepdf,
-                               mime='application/octet-stream')      
+                               mime='application/octet-stream')   
+        st.title('Registrar dados')    
           
 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
