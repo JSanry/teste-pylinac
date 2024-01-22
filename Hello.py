@@ -18,7 +18,8 @@ from streamlit.logger import get_logger
 from PIL import Image
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
-from streamlit_extras.colored_header import colored_header
+#from streamlit_extras.colored_header import colored_header
+from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 LOGGER = get_logger(__name__)
 
@@ -137,7 +138,8 @@ def run():
 
     # View All Vendors
     elif action == "Ver todos dados":
-        st.dataframe(existing_data,hide_index=True)
+        filtered_df= dataframe_explorer(existing_data)
+        st.dataframe(filter_df,hide_index=True)
 
     # Delete Vendor
     elif action == "Deletar dado":
