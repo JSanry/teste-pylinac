@@ -91,8 +91,13 @@ def Picket_Fence():
         with col3:
             #today = date.today()
             dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d_%m_%Y")
+            data_teste = dia.strftime("%d-%m-%Y")
+           
+        if not Unit or not Fis:
+            st.warning("Preencher campos de registro faltantes")
+        else:
             nomepdf = 'PF_' + Unit +'_' + data_teste +'.pdf'
+            
             #Gerar pdf
 
         col3, col4 = st.columns(2)

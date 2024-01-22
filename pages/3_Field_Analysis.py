@@ -88,9 +88,9 @@ def FA():
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
         with col3:
             var_campo = st.number_input(label='Tamanho de campo',step=1,min_value=1, max_value=40, value=10)
             Campo= str(var_campo)+'x'+ str(var_campo)
@@ -98,7 +98,14 @@ def FA():
             #today = date.today()
             dia = st.date_input("Data de realização do teste:", value= date.today())    
             data_teste = dia.strftime("%d_%m_%Y")
+            
+            
+        if not Unit or not Fis:
+            st.warning("Preencher campos de registro faltantes")
+        else:
             nomepdf = 'Field_' + '_'+ Campo +'_' + Unit +'_' + data_teste +'.pdf'
+            
+        
             #Gerar pdf
 
         cola, colb = st.columns(2)
