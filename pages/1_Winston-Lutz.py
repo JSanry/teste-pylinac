@@ -39,7 +39,9 @@ def WL():
 
     st.title('Upload da Imagens')
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
-    if img_wl is not None:
+    if img_wl is None:
+        st.warning("selecionar todas imagens")
+    elif img_wl is not None:
         wl = WinstonLutz(img_wl,use_filenames=names)
         if unid == 'VARIAN':
             wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.VARIAN_IEC)
