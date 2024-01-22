@@ -47,44 +47,7 @@ def WL():
             wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.VARIAN_IEC)
         else:
             wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.ELEKTA_IEC)
-        data = wl.results_data()
-        
-        #if data.passed:
-            #st.markdown("### Resultado Passou ")
-        #else:
-            #st.markdown("### Resultado Não Passou! ")
-           
-        #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
-        #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
-
-        st.title('Defenições PDF')
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
-        with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
-
-        #today = date.today()
-        dia = st.date_input("Data de realização do teste:", value= date.today())    
-        data_teste = dia.strftime("%d_%m_%Y")
-
-        if not Unit or not Fis:
-            st.warning("Preencher campos de registro faltantes")
-        else:
-            nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
-        #Gerar pdf
-        printpdf = st.button("Gerar pdf")
-
-        if printpdf:
-            #img_logo= Image.open('logoinrad.png')
-            wl.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
-            with open("res.pdf", "rb") as pdf_file:
-                PDFbyte = pdf_file.read()
-            st.download_button(label="Download PDF",
-                               data=PDFbyte,
-                               file_name=nomepdf,
-                               mime='application/octet-stream')  
+        data = wl.results_data() 
 
         wl.save_images("g.png", axis='Gantry')
         wl.save_images("c.png",axis='Collimator')
@@ -153,14 +116,45 @@ def WL():
         'VERT z (mm)': t[5],
         })
 
-        st.dataframe(tb,hide_index=True)
-
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
         img_c= Image.open('c.png')
         st.image(img_c, output_format="auto")
         img_m= Image.open('m.png')
         st.image(img_m, output_format="auto") 
+
+        st.title('Defenições PDF')
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
+        with col2:
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
+
+        #today = date.today()
+        dia = st.date_input("Data de realização do teste:", value= date.today())    
+        data_teste = dia.strftime("%d_%m_%Y")
+
+        if not Unit or not Fis:
+            st.warning("Preencher campos de registro faltantes")
+        else:
+            nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
+        #Gerar pdf
+        printpdf = st.button("Gerar pdf")
+
+        if printpdf:
+            #img_logo= Image.open('logoinrad.png')
+            wl.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            with open("res.pdf", "rb") as pdf_file:
+                PDFbyte = pdf_file.read()
+            st.download_button(label="Download PDF",
+                               data=PDFbyte,
+                               file_name=nomepdf,
+                               mime='application/octet-stream') 
+            
+
+
+        st.dataframe(tb,hide_index=True)
 
     
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
