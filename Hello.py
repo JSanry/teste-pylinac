@@ -122,12 +122,12 @@ def run():
     # Delete Vendor
     elif action == "Deletar dado":
         test_to_delete = st.selectbox(
-            "Selecionar teste para deletar", options=existing_data["Data"].tolist()
+            "Selecionar teste para deletar", options=existing_data["Cod"].tolist()
         )
 
         if st.button("Delete"):
             existing_data.drop(
-                existing_data[existing_data["Data"] == test_to_delete].index,
+                existing_data[existing_data["Cod"] == test_to_delete].index,
                 inplace=True,
             )
             conn.update(worksheet=teste_dados, data=existing_data)
