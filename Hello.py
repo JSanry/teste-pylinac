@@ -65,12 +65,12 @@ def run():
         ],
     )
 
-    col_testes = [("StarShot", int(8)), ("WinstonLutz",2),("PicketFence",2),("FieldAnalysis",2)]
+    col_testes = [("StarShot", 8), ("WinstonLutz",2),("PicketFence",2),("FieldAnalysis",2)]
     # Establishing a Google Sheets connection
     conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Fetch existing vendors data
-    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(col_testes[teste_dados])), ttl=5)
+    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(int(col_testes[teste_dados]))), ttl=5)
     existing_data = existing_data.dropna(how="all")
 
     action = st.selectbox(
