@@ -69,7 +69,7 @@ def run():
     conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Fetch existing vendors data
-    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(4)), ttl=5)
+    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(7)), ttl=5)
     existing_data = existing_data.dropna(how="all")
 
     action = st.selectbox(
@@ -122,12 +122,12 @@ def run():
     # Delete Vendor
     elif action == "Deletar dado":
         test_to_delete = st.selectbox(
-            "Selecionar teste para deletar", options=existing_data["Teste"].tolist()
+            "Selecionar teste para deletar", options=existing_data["Data"].tolist()
         )
 
         if st.button("Delete"):
             existing_data.drop(
-                existing_data[existing_data["Teste"] == test_to_delete].index,
+                existing_data[existing_data["Data"] == test_to_delete].index,
                 inplace=True,
             )
             conn.update(worksheet=teste_dados, data=existing_data)

@@ -23,6 +23,7 @@ from fpdf import FPDF
 from pylinac import Starshot
 
 import streamlit as st
+from streamlit_gsheets import GSheetsConnection
 from streamlit.hello.utils import show_code
 import pandas as pd
 
@@ -47,9 +48,8 @@ def Star_Shot():
             st.markdown("### Resultado Não Passou! ")
 
         #Resultados  
-        min_diametro = data.circle_diameter_mm  
-        #st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
-        st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %min_diametro, "mm")
+    
+        st.write("Círculo mínimo tem o diâmetro de" , "%.3f" %data.circle_diameter_mm, "mm")
         st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
         
         #Mostra imagens
@@ -62,11 +62,11 @@ def Star_Shot():
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'),index= None)
         with col3:
-            Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ))
+            Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
 
         today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
@@ -83,9 +83,50 @@ def Star_Shot():
                                data=PDFbyte,
                                file_name=nomepdf,
                                mime='application/octet-stream')   
-        st.title('Registrar dados')    
-          
+        
+        st.title('Registrar dados')
+        # Estabelece conexao Google Sheets 
+        conn = st.connection("gsheets", type=GSheetsConnection)   
 
+        # Toma dados atuais
+        existing_data = conn.read(worksheet="StarShot", usecols=list(range(6)), ttl=5)
+        existing_data = existing_data.dropna(how="all")
+
+        #botao registro
+        submit_button = st.form_submit_button(label="Registrar dados")
+
+        if submit_button:
+                #checar se campos necessarios preenchidos
+                if not Unit or not Par or not Fis:
+                    st.warning("Preencher campos de registro faltantes")
+                # condiçao evitar registros repetidos - avaliar melhor forma de fazer
+                #elif existing_data["Data"].str.contains(data_teste).any():
+                #    st.warning("A vendor with this company name already exists.")
+                else:
+                    teste_data = pd.DataFrame(
+                        [
+                            {
+                                "Data": data_teste.strftime("%d-%m-%Y"),
+                                "Parametro": Par,
+                                "Diametro":  "%.3f" %data.circle_diameter_mm,
+                                "RaioAnalise": r,
+                                "Aparelho": Unit ,
+                                "Fisico": Fis,
+                                
+                            }
+                        ]
+                    )
+                    updated_df = pd.concat([existing_data, teste_data], ignore_index=True)
+                    conn.update(worksheet="StarShot", data=updated_df)
+                    st.success("Registro feito!")
+
+
+
+
+
+
+        
+#configurações visuais 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 logo_img= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" 
 ycol, xcol = st.columns(2)
