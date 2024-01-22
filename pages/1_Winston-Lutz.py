@@ -61,14 +61,18 @@ def WL():
         
         col1, col2 = st.columns(2)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
 
         #today = date.today()
         dia = st.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%d_%m_%Y")
-        nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
+
+        if not Unit or not Fis:
+            st.warning("Preencher campos de registro faltantes")
+        else:
+            nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
 

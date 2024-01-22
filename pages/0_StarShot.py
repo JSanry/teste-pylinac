@@ -67,13 +67,16 @@ def Star_Shot():
             Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'),index= None)
         with col3:
             Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
+
+        dia = st.date_input("Data de realização do teste:", value= date.today())    
+        data_teste = dia.strftime("%d-%m-%Y")
+
         if not Unit or not Par or not Fis:
             st.warning("Preencher campos de registro faltantes")
         else:
-            today = date.today()
-            dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d-%m-%Y")
             nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
+       
+            
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
         if printpdf:
