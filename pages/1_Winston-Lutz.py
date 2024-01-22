@@ -141,7 +141,7 @@ def WL():
         #Gerar pdf
         printpdf = st.button("Gerar pdf")
 
-
+        
 
 
         if printpdf:
