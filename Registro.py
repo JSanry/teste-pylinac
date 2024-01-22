@@ -139,7 +139,7 @@ def run():
     # View All Vendors
     elif action == "Ver todos dados":
         filtered_df= dataframe_explorer(existing_data)
-        st.dataframe(filter_df,hide_index=True)
+        st.dataframe(filtered_df,hide_index=True)
 
     # Delete Vendor
     elif action == "Deletar dado":
