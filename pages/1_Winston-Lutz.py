@@ -34,7 +34,7 @@ def WL():
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=5.0, value=2.0)
     unid = st.sidebar.selectbox('Unidade',('VARIAN', 'ELEKTA'))
-    names =st.sidebar.checkbox('Usar Nome de Arquivos')
+    names =st.sidebar.checkbox('Usar Nome de Arquivos', value= True)
     col =st.sidebar.checkbox('Imagens Colimador')
 
     st.title('Upload da Imagens')
