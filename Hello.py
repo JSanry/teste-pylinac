@@ -47,26 +47,17 @@ def run():
         if st.button("🔲Field Analysis"):
             st.switch_page("pages/3_Field_Analysis.py")
 
-
+    st.header('', divider="blue")
 
     #st.image(image, caption='Sunrise by the mountains')
     st.write("# Registro dos Testes  📋")
 
-    colored_header(
-        label="My New Pretty Colored Header",
-        description="This is a description",
-        color_name="violet-70",
-    )
+ 
 
 
     st.sidebar.success("Selecione Testes Acima")
-
-    st.markdown(
-        """
-        Dados registrados dos testes
-    """
-    )
-
+    
+    
     # Constantes
     FISICOS = [
         "Manufacturer",

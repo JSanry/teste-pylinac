@@ -155,7 +155,7 @@ with col4:
 with col5:
     if st.button("🔲Field Analysis"):
         st.switch_page("pages/3_Field_Analysis.py")
-
+st.header('', divider="blue")
 ycol, xcol = st.columns(2)
 with ycol:
     st.markdown("# StarShot 🎇")
