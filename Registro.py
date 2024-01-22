@@ -30,7 +30,7 @@ def run():
     #image = Image.open('logoinrad.png')
 
     #st.image(image, caption='Sunrise by the mountains')
-    st.write("# Registro dos Testes📋")
+    st.write("# Registro dos Testes  📋")
     st.sidebar.success("Selecione Testes Acima")
 
     st.markdown(
@@ -38,8 +38,6 @@ def run():
         Dados registrados dos testes
     """
     )
-    # Titulo
-    st.title("Registro de Testes")
 
     # Constantes
     FISICOS = [
