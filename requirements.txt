@@ -3,7 +3,8 @@ numpy
 pandas
 pydeck
 streamlit
+st-gsheets-connection
 pylinac
 fpdf
 datetime
-st-gsheets-connection
+
