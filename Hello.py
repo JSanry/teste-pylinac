@@ -18,6 +18,7 @@ from streamlit.logger import get_logger
 from PIL import Image
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
+from streamlit_extras.colored_header import colored_header
 
 LOGGER = get_logger(__name__)
 
@@ -29,8 +30,35 @@ def run():
     )
     #image = Image.open('logoinrad.png')
 
+    col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+    with col1:
+        if st.button("📋Registro"):
+            st.switch_page("Hello.py")
+    with col2:
+        if st.button("🎇Star Shot"):
+            st.switch_page("pages/0_StarShot.py")
+    with col3:
+        if st.button("🎯Winston-Lutz"):
+            st.switch_page("pages/1_Winston-Lutz.py")
+    with col4:
+        if st.button("🚧Picket Fence"):
+            st.switch_page("pages/2_Picket_Fence.py")
+    with col5:
+        if st.button("🔲Field Analysis"):
+            st.switch_page("pages/3_Field_Analysis.py")
+
+
+
     #st.image(image, caption='Sunrise by the mountains')
     st.write("# Registro dos Testes  📋")
+
+    colored_header(
+        label="My New Pretty Colored Header",
+        description="This is a description",
+        color_name="violet-70",
+    )
+
+
     st.sidebar.success("Selecione Testes Acima")
 
     st.markdown(

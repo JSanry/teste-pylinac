@@ -4,6 +4,7 @@ pandas
 pydeck
 streamlit
 st-gsheets-connection
+streamlit-extras
 pylinac
 fpdf
 datetime
