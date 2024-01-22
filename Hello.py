@@ -69,7 +69,7 @@ def run():
     conn = st.connection("gsheets", type=GSheetsConnection)
 
     # Fetch existing vendors data
-    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(7)), ttl=5)
+    existing_data = conn.read(worksheet=teste_dados, usecols=list(range(8)), ttl=5)
     existing_data = existing_data.dropna(how="all")
 
     action = st.selectbox(
