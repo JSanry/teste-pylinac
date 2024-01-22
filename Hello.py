@@ -60,8 +60,10 @@ def run():
     teste_dados = st.selectbox(
         "Escolha o teste",
         [
-            "Teste",
-            "Star",
+            "Starshot",
+            "WinstonLutz",
+            "PicketFence",
+            "FieldAnalysis",
         ],
     )
 
