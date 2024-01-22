@@ -111,7 +111,7 @@ def Star_Shot():
                                 "Data": data_teste,
                                 "Parametro": Par,
                                 "Diametro":  "%.3f" %data.circle_diameter_mm,
-                                "RaioAnalise": r,
+                                "RaioAnalise": r ,
                                 "Aparelho": Unit ,
                                 "Fisico": Fis,
                                 
