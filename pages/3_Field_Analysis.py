@@ -76,14 +76,12 @@ def FA():
         with col3:
              st.write("Simetria Vertical:" , "%.3f" %data.protocol_results["symmetry_vertical"])
              st.write("Simetria Horizontal:" , "%.3f" %data.protocol_results["symmetry_horizontal"]) 
+
+        #fa.save_analyzed_image("r.png", split_plots = False)
+        #img_res= Image.open('r.png')
+        #st.image(img_res, output_format="auto")
+        
     
-        
-       # fa.save_analyzed_image("fa.png", split_plots = False)
-       # img_res= Image.open('fa.png')
-       # st.image(img_res, output_format="auto")
-        
-        
-        
         st.title('Defenições PDF')
         
         col1, col2, col3, col4 = st.columns(4)
@@ -125,23 +123,25 @@ def FA():
         #s_img =st.checkbox('Imagens Separadas')
         #split= s_img
 
+       
+        
         
         #if not split:
-        #   img_res= Image.open('r_img.png')
+        #   img_res= Image.open('r.png')
         #   st.image(img_res, output_format="auto")
         
         #else:
-        #    img_res1= Image.open('r_imgHorizontal Profile.png')
-        #    img_res2= Image.open('r_imgVertical Profile.png')
-        #    img_res3= Image.open('r_imgImage.png')
+        #    img_res1= Image.open('rHorizontal Profile.png')
+        #    img_res2= Image.open('rVertical Profile.png')
+        #    img_res3= Image.open('rImage.png')
 
-            #col1, col2, col3 = st.columns(3)
-            #with col1:
-                #st.image(img_res1, output_format="auto")
-            #with col2:
-             #   st.image(img_res2, output_format="auto")
-            #with col3:
-             #   st.image(img_res3, output_format="auto")     
+        #    col1, col2, col3 = st.columns(3)
+        #    with col1:
+        #        st.image(img_res1, output_format="auto")
+        #    with col2:
+        #        st.image(img_res2, output_format="auto")
+        #    with col3:
+        #        st.image(img_res3, output_format="auto")     
 
 
 st.set_page_config(page_title="Field Analysis", page_icon="🔲")
