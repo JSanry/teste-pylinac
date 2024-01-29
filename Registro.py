@@ -21,7 +21,7 @@ import pandas as pd
 #from streamlit_extras.colored_header import colored_header
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 
-#LOGGER = get_logger(__name__)
+LOGGER = get_logger(__name__)
 
 
 def run():
@@ -104,45 +104,12 @@ def run():
         ],
     )
 
-    if action == "Dados novo teste":
-        st.markdown("Enter the details of the new vendor below.")
-        with st.form(key="teste_form"):
-            company_name = st.text_input(label="Company Name*")
-            business_type = st.selectbox(
-                "Business Type*", options=FISICOS, index=None
-            )
-            products = st.multiselect("Products Offered", options=UNIDADE)
-            onboarding_date = st.date_input(label="Onboarding Date")
-
-            st.markdown("**required*")
-            submit_button = st.form_submit_button(label="Submit Vendor Details")
-
-            if submit_button:
-                if not company_name or not business_type:
-                    st.warning("Ensure all mandatory fields are filled.")
-                elif existing_data["Teste"].str.contains(company_name).any():
-                    st.warning("A vendor with this company name already exists.")
-                else:
-                    teste_data = pd.DataFrame(
-                        [
-                            {
-                                "Teste": company_name,
-                                "Fisico": business_type,
-                                "Aparelho": ", ".join(products),
-                                "Dia": onboarding_date.strftime("%Y-%m-%d"),
-                            }
-                        ]
-                    )
-                    updated_df = pd.concat([existing_data, teste_data], ignore_index=True)
-                    conn.update(worksheet=teste_dados, data=updated_df)
-                    st.success("Registro feito!")
-
-    # View All Vendors
-    elif action == "Ver todos dados":
+    # Ver tabelas dados
+    if action == "Ver todos dados":
         filtered_df= dataframe_explorer(existing_data)
         st.dataframe(filtered_df,hide_index=True)
 
-    # Delete Vendor
+    # Deletar entrada na tabela
     elif action == "Deletar dado":
         test_to_delete = st.selectbox(
             "Selecionar teste para deletar", options=existing_data["Cod"].tolist()
