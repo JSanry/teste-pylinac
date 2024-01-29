@@ -53,9 +53,6 @@ def run():
     #st.image(image, caption='Sunrise by the mountains')
     st.write("# Registro dos Testes  📋")
 
- 
-
-
     st.sidebar.success("Selecione Testes Acima")
     
     
