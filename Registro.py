@@ -21,7 +21,7 @@ import pandas as pd
 #from streamlit_extras.colored_header import colored_header
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 
-LOGGER = get_logger(__name__)
+#LOGGER = get_logger(__name__)
 
 
 def run():
