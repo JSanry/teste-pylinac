@@ -136,7 +136,9 @@ def Picket_Fence():
                 # condiçao evitar registros repetidos - avaliar melhor forma de fazer
                 #elif existing_data["Data"].str.contains(data_teste).any():
                 #    st.warning("A vendor with this company name already exists.")
+                
                 else:
+                    separador= ' '
                     teste_data = pd.DataFrame(
                         [
                             {
@@ -146,7 +148,7 @@ def Picket_Fence():
                                 "Erro Absoluto Medio": "%.3f" %data.absolute_median_error_mm ,
                                 "Erro Maximo" : "%.3f" %data.max_error_mm,
                                 "Lamina Maximo": "%.0f" %data.max_error_leaf,
-                                "Laminas Falhando": (*data.failed_leaves),
+                                "Laminas Falhando": separador.join(map(str,data.failed_leaves)),
                                 "Aparelho": Unit ,
                                 "Fisico": Fis,
                                 
