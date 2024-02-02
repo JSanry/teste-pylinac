@@ -145,7 +145,7 @@ def Picket_Fence():
                                 "Laminas Passando":  data.percent_leaves_passing,
                                 "Erro Absoluto Medio": data.absolute_median_error_mm ,
                                 "Erro Maximo" : data.max_error_mm,
-                                "Lamina Maximo": data.max_error_picket
+                                "Lamina Maximo": data.max_error_picket,
                                 "Aparelho": Unit ,
                                 "Fisico": Fis,
                                 
