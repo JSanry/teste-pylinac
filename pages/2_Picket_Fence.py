@@ -138,7 +138,7 @@ def Picket_Fence():
                 #    st.warning("A vendor with this company name already exists.")
                 
                 else:
-                    separador= ' '
+                    separador= ','
                     teste_data = pd.DataFrame(
                         [
                             {
