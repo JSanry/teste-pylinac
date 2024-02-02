@@ -123,7 +123,7 @@ def Picket_Fence():
         conn = st.connection("gsheets", type=GSheetsConnection)   
 
         # Toma dados atuais
-        existing_data = conn.read(worksheet="PicketFence", usecols=list(range(6)), ttl=5)
+        existing_data = conn.read(worksheet="PicketFence", usecols=list(range(9)), ttl=5)
         existing_data = existing_data.dropna(how="all")
 
         #botao registro
