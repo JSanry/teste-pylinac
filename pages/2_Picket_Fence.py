@@ -20,6 +20,7 @@ import requests
 from pylinac.picketfence import PicketFence, MLCArrangement, MLC
 
 import streamlit as st
+from streamlit_gsheets import GSheetsConnection
 from streamlit.hello.utils import show_code
 import pandas as pd
 
@@ -35,7 +36,7 @@ def Picket_Fence():
     #names =st.sidebar.checkbox('Usar Nome de Arquivos')
     #mlc_ar = MLC.MILLENNIUM
     st.title('Upload da imagem')
-    pfimg = st.file_uploader('upload')
+    pfimg = st.file_uploader(label='upload', label_visibility = "hidden")
     
     if pfimg is not None:
         #mlc_Millennium80 = MLCArrangement(leaf_arrangement=[(80, 10)])
@@ -67,10 +68,10 @@ def Picket_Fence():
         else:
             st.markdown("### Resultado Não Passou! ")
            
-        st.write("Porcentagem laminas passando:" , "%.3f" %data.percent_leaves_passing, "mm")
+        st.write("Porcentagem laminas passando:" , "%.3f" %data.percent_leaves_passing, "%")
         st.write("Erro absoluto médio:" , "%.3f" %data.absolute_median_error_mm, "mm")
         st.write("O erro máximo é:" , "%.3f" %data.max_error_mm, "mm, na lamina", "%.0f" %data.max_error_leaf, " no picket", "%.0f" %data.max_error_picket)
-        #st.write("O centro do círculo ocorre em" , "%.1f" %data.circle_center_x_y[0], ",","%.1f" %data.circle_center_x_y[1])
+       
         
         pf.save_analyzed_image("pf.png")
         img_res= Image.open('pf.png')
@@ -85,9 +86,9 @@ def Picket_Fence():
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'))
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'),index= None)
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'))
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'),index= None)
         with col3:
             #today = date.today()
             dia = st.date_input("Data de realização do teste:", value= date.today())    
@@ -113,9 +114,68 @@ def Picket_Fence():
                 st.download_button(label="Download PDF",
                                 data=PDFbyte,
                                 file_name=nomepdf,
-                                mime='application/octet-stream')      
+                                mime='application/octet-stream')    
+
+
+            st.title('Registrar dados')
+        
+        # Estabelece conexao Google Sheets 
+        conn = st.connection("gsheets", type=GSheetsConnection)   
+
+        # Toma dados atuais
+        existing_data = conn.read(worksheet="PicketFence", usecols=list(range(6)), ttl=5)
+        existing_data = existing_data.dropna(how="all")
+
+        #botao registro
+        registro_button = st.button("Registrar dados")
+
+        if registro_button:
+                #checar se campos necessarios preenchidos
+                if not Unit or not Fis:
+                    st.warning("Preencher campos de registro faltantes")
+                # condiçao evitar registros repetidos - avaliar melhor forma de fazer
+                #elif existing_data["Data"].str.contains(data_teste).any():
+                #    st.warning("A vendor with this company name already exists.")
+                else:
+                    teste_data = pd.DataFrame(
+                        [
+                            {
+                                "Data": data_teste,
+                                "Tolerancia": tol,
+                                "Laminas Passando":  data.percent_leaves_passing,
+                                "Erro Absoluto Medio": data.absolute_median_error_mm ,
+                                "Erro Maximo" : data.max_error_mm,
+                                "Lamina Maximo": data.max_error_picket
+                                "Aparelho": Unit ,
+                                "Fisico": Fis,
+                                
+                            }
+                        ]
+                    )
+                    updated_df = pd.concat([existing_data, teste_data], ignore_index=True)
+                    conn.update(worksheet="PicketFence", data=updated_df)
+                    st.success("Registro feito!")  
 
 st.set_page_config(page_title="Picket Fence", page_icon="🚧")
+
+
+col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+with col1:
+    if st.button("📋Registro"):
+        st.switch_page("Hello.py")
+with col2:
+    if st.button("🎇Star Shot"):
+        st.switch_page("pages/0_StarShot.py")
+with col3:
+    if st.button("🎯Winston-Lutz"):
+        st.switch_page("pages/1_Winston-Lutz.py")
+with col4:
+    if st.button("🚧Picket Fence"):
+        st.switch_page("pages/2_Picket_Fence.py")
+with col5:
+    if st.button("🔲Field Analysis"):
+        st.switch_page("pages/3_Field_Analysis.py")
+st.header('', divider="blue")
 
 #logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
 #logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
