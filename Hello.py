@@ -82,7 +82,7 @@ def run():
         ],
     )
 
-    col_testes = {"StarShot":6, "WinstonLutz":2, "PicketFence":2, "FieldAnalysis":2}
+    col_testes = {"StarShot":6, "WinstonLutz":2, "PicketFence":8, "FieldAnalysis":2}
     # Establishing a Google Sheets connection
     conn = st.connection("gsheets", type=GSheetsConnection)
 
