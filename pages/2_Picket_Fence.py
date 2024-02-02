@@ -146,7 +146,7 @@ def Picket_Fence():
                                 "Erro Absoluto Medio": "%.3f" %data.absolute_median_error_mm ,
                                 "Erro Maximo" : "%.3f" %data.max_error_mm,
                                 "Lamina Maximo": "%.0f" %data.max_error_leaf,
-                                "Laminas Falhando": ", ".join(data.failed_leaves),
+                                "Laminas Falhando": (*data.failed_leaves),
                                 "Aparelho": Unit ,
                                 "Fisico": Fis,
                                 
