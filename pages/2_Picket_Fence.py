@@ -142,10 +142,11 @@ def Picket_Fence():
                             {
                                 "Data": data_teste,
                                 "Tolerancia": tol,
-                                "Laminas Passando":  data.percent_leaves_passing,
-                                "Erro Absoluto Medio": data.absolute_median_error_mm ,
-                                "Erro Maximo" : data.max_error_mm,
-                                "Lamina Maximo": data.max_error_picket,
+                                "Laminas Passando": "%.3f" %data.percent_leaves_passing,
+                                "Erro Absoluto Medio": "%.3f" %data.absolute_median_error_mm ,
+                                "Erro Maximo" : "%.3f" %data.max_error_mm,
+                                "Lamina Maximo": "%.0f" %data.max_error_leaf,
+                                "Laminas Falhando": data.failed_leaves,
                                 "Aparelho": Unit ,
                                 "Fisico": Fis,
                                 
