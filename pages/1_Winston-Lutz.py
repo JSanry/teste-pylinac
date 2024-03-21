@@ -41,7 +41,7 @@ def WL():
     img_wl = st.file_uploader('upload', accept_multiple_files=True)
     if len(img_wl)<2:
         st.warning("Selecionar todas as imagens!")
-    elif len(img_wl)>=2:
+    elif len(img_wl)=>2:
         wl = WinstonLutz(img_wl,use_filenames=names)
         if unid == 'VARIAN':
             wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.VARIAN_IEC)
