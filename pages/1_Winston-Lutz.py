@@ -118,7 +118,7 @@ def WL():
         'VERT z (mm)': t[5],
         })
 
-        st.dataframe(tb,hide_index=True)
+        
 
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
@@ -157,6 +157,8 @@ def WL():
                                data=PDFbyte,
                                file_name=nomepdf,
                                mime='application/octet-stream') 
+
+        st.dataframe(tb,hide_index=True)
             
 
             
