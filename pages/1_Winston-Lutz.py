@@ -118,6 +118,8 @@ def WL():
             'VERT z (mm)': t[5],
             })
 
+            st.dataframe(tb,hide_index=True)
+
         except:
             st.warning("Sem Z para criar tabela")
 
@@ -161,10 +163,9 @@ def WL():
                                mime='application/octet-stream') 
             
 
-        try:
-            st.dataframe(tb,hide_index=True)
-        except:
             
+
+
 
     
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
