@@ -105,16 +105,22 @@ def WL():
         t[2].append("Média")
         t[3].append(round(soma[0]/soma[1],2))
         t[4].append(round(soma[2]/soma[3],2))
-        t[5].append(round(soma[4]/soma[5],2))
+        
+        try:
+            t[5].append(round(soma[4]/soma[5],2))
 
-        tb = pd.DataFrame({
-        'Gantry': t[0],
-        'Colimador': t[1],
-        'Mesa': t[2],
-        'LAT x (mm)': t[3],
-        'LONG y (mm)': t[4],
-        'VERT z (mm)': t[5],
-        })
+            tb = pd.DataFrame({
+            'Gantry': t[0],
+            'Colimador': t[1],
+            'Mesa': t[2],
+            'LAT x (mm)': t[3],
+            'LONG y (mm)': t[4],
+            'VERT z (mm)': t[5],
+            })
+
+        except:
+            st.warning("Sem Z para criar tabela")
+
 
         img_g= Image.open('g.png')
         st.image(img_g, output_format="auto")
