@@ -161,8 +161,8 @@ def WL():
                                mime='application/octet-stream') 
             
 
-
-        st.dataframe(tb,hide_index=True)
+        try:
+            st.dataframe(tb,hide_index=True)
 
     
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
