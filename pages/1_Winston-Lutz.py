@@ -108,7 +108,7 @@ def WL():
         try:
             t[5].append(round(soma[4]/soma[5],2))
         except:
-            t[5].append(round(soma[4,2]))
+            t[5].append(round(soma[4],2))
         tb = pd.DataFrame({
         'Gantry': t[0],
         'Colimador': t[1],
