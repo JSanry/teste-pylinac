@@ -14,11 +14,11 @@
 
 from urllib.error import URLError
 
-import altair as alt
+#import altair as alt
 import pandas as pd
 from PIL import Image
 from datetime import date
-from fpdf import FPDF
+#from fpdf import FPDF
 import math
 
 from pylinac.winston_lutz import WinstonLutz, MachineScale

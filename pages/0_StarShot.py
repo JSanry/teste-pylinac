@@ -72,7 +72,7 @@ def Star_Shot():
             Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
 
         dia = st.date_input("Data de realização do teste:", value= date.today())    
-        data_teste = dia.strftime("%d-%m-%Y")
+        data_teste = dia.strftime("%m-%d-%Y")
 
         if not Unit or not Par or not Fis:
             st.warning("Preencher campos de registro faltantes")
