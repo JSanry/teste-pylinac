@@ -35,10 +35,12 @@ def WL():
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=15.0, value=2.0)
     unid = st.sidebar.selectbox('Unidade',('VARIAN', 'ELEKTA'))
     names =st.sidebar.checkbox('Usar Nome de Arquivos', value= True)
-    vVRT = st.sidebar.number_input(label='VRT',step=0.5,format="%.1f",min_value=-100, max_value=100, value=0.0)
-    vLAT = st.sidebar.number_input(label='VRT',step=0.5,format="%.1f",min_value=-100, max_value=1000, value=0.0)
-    vVRT = st.sidebar.number_input(label='VRT',step=0.5,format="%.1f",min_value=-100, max_value=100, value=0.0)
+
     
+    VRT = st.sidebar.number_input(label='VRT',step=0.5,format="%.1f",min_value=-100.0, max_value=100.0, value=0.0)
+    LNG = st.sidebar.number_input(label='LNG',step=0.5,format="%.1f",min_value=-100.0, max_value=100.0, value=0.0)
+    LAT = st.sidebar.number_input(label='LAT',step=0.5,format="%.1f",min_value=-100.0, max_value=100.0, value=0.0)
+
     #col =st.sidebar.checkbox('Imagens Colimador')
 
     st.title('Upload da Imagens')
@@ -61,9 +63,8 @@ def WL():
         img_s= Image.open('s.png')
         st.image(img_s, output_format="auto")
 
-        #st.write(wl.bb_shift_instructions())
-        st.write(wl.bb_shift_instructions(couch_vrt=vVRT, couch_lng=vLNG, couch_lat=vLAT))
-        
+        inst= wl.bb_shift_instructions(couch_vrt=VRT, couch_lng=LNG, couch_lat=LAT)
+        st.write(inst)
         #Calula e plota tabela deslocamentos cada imagem
         t=[[],[],[],[],[],[]]
         soma=[0,0,0,0,0,0]
