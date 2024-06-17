@@ -97,7 +97,7 @@ def run():
         
             "Ver todos dados",
             #"Dados novo teste",
-            "Deletar dado",
+            # "Deletar dado",
         ],
     )
 

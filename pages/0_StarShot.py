@@ -37,7 +37,7 @@ def Star_Shot():
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
 
     #upload imagem
-    st.title('Upload da imagem')
+    #st.title('Upload da imagem')
 
     #analise da imagem
     star_img = st.file_uploader(label="upload", label_visibility= "hidden")
@@ -137,9 +137,9 @@ def Star_Shot():
 #configurações visuais 
 st.set_page_config(page_title="StarShot", page_icon="🎇")
 logo_img= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" 
+st.logo( logo_img)
 
-
-col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+col1, col2, col3, col4, col5 = st.columns(spec=[0.18,0.2,0.2,0.2,0.22])
 with col1:
     if st.button("📋Registro"):
         st.switch_page("Hello.py")
@@ -156,11 +156,12 @@ with col5:
     if st.button("🔲Field Analysis"):
         st.switch_page("pages/3_Field_Analysis.py")
 st.header('', divider="blue")
-ycol, xcol = st.columns(2)
-with ycol:
-    st.markdown("# StarShot 🎇")
-with xcol:
-    st.image( logo_img, width= 250)
+#ycol, xcol = st.columns(2)
+#with ycol:
+    #st.markdown("# StarShot 🎇")
+#with xcol:
+    #st.image( logo_img, width= 250)
+st.markdown("# StarShot 🎇")
  
 
 
