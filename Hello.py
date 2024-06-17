@@ -31,7 +31,7 @@ def run():
     )
     #image = Image.open('logoinrad.png')
 
-    col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+    col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
     with col1:
         if st.button("📋Registro"):
             st.switch_page("Hello.py")
@@ -97,7 +97,7 @@ def run():
         
             "Ver todos dados",
             #"Dados novo teste",
-            "Deletar dado",
+            #"Deletar dado",
         ],
     )
 

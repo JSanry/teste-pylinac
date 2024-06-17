@@ -43,8 +43,8 @@ def WL():
 
     #col =st.sidebar.checkbox('Imagens Colimador')
 
-    st.title('Upload da Imagens')
-    img_wl = st.file_uploader('upload', accept_multiple_files=True)
+
+    img_wl = st.file_uploader('upload', accept_multiple_files=True, label_visibility= "hidden")
     if len(img_wl)<2:
         st.warning("Selecionar todas as imagens!")
     elif len(img_wl)>=2:
@@ -149,13 +149,7 @@ def WL():
         else:
             nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
         #Gerar pdf
-        printpdf = st.button("Gerar pdf")
 
-        
-
-
-        if printpdf:
-            #img_logo= Image.open('logoinrad.png')
             wl.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
@@ -166,18 +160,13 @@ def WL():
 
         st.dataframe(tb,hide_index=True)
             
-
-            
-
-
-
-    
+   
 st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
 
 logo_img= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" 
+st.logo(logo_img)
 
-
-col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
 with col1:
     if st.button("📋Registro"):
         st.switch_page("Hello.py")
@@ -194,12 +183,8 @@ with col5:
     if st.button("🔲Field Analysis"):
         st.switch_page("pages/3_Field_Analysis.py")
 st.header('', divider="blue")
+st.markdown("# Winston-Lutz 🎯")
 
-colx, coly = st.columns(2)
-with colx:
-    st.markdown("# Winston-Lutz 🎯")
-with coly:
-    st.image( logo_img, width= 250)
 
 st.sidebar.header("Winston-Lutz")
 #st.write("""Teste""")

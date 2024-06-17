@@ -49,8 +49,7 @@ def FA():
     else:
         var_edge = Edge.FWHM
 
-    st.title('Upload da imagem')
-    img_F = st.file_uploader('upload')
+    img_F = st.file_uploader('upload',label_visibility= "hidden")
     
     if img_F is not None:  
         fa=FieldAnalysis(img_F)
@@ -102,23 +101,14 @@ def FA():
             st.warning("Preencher campos de registro faltantes")
         else:
             nomepdf = 'Field_' + '_'+ Campo +'_' + Unit +'_' + data_teste +'.pdf'
-            
-        
-            #Gerar pdf
-
-        cola, colb = st.columns(2)
-        with cola:
-            printpdf = st.button("Gerar pdf")
-        with colb:    
-            if printpdf:
-                #img_logo= Image.open('logoinrad.png')
-                fa.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
-                with open("res.pdf", "rb") as pdf_file:
-                    PDFbyte = pdf_file.read()
-                st.download_button(label="Download PDF",
-                                data=PDFbyte,
-                                file_name=nomepdf,
-                                mime='application/octet-stream')      
+        #Gerar pdf
+            fa.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
+            with open("res.pdf", "rb") as pdf_file:
+                PDFbyte = pdf_file.read()
+            st.download_button(label="Download PDF",
+                            data=PDFbyte,
+                            file_name=nomepdf,
+                            mime='application/octet-stream')      
                 
         #s_img =st.checkbox('Imagens Separadas')
         #split= s_img
@@ -147,7 +137,7 @@ def FA():
 st.set_page_config(page_title="Field Analysis", page_icon="🔲")
 
 
-col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
 with col1:
     if st.button("📋Registro"):
         st.switch_page("Hello.py")
@@ -167,11 +157,9 @@ st.header('', divider="blue")
 
 
 htp= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png"
-colq, colw = st.columns(2)
-with colq:
-    st.markdown("# Field Analysis  🔲 ")
-with colw:
-    st.image( htp, width= 250)
+
+st.markdown("# Field Analysis  🔲 ")
+
 
 st.sidebar.header("Field Analysis")
 #st.write("""Teste""")

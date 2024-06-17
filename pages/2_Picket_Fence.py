@@ -35,7 +35,7 @@ def Picket_Fence():
     prof =st.sidebar.checkbox('Plotar profile pior lamina')
     #names =st.sidebar.checkbox('Usar Nome de Arquivos')
     #mlc_ar = MLC.MILLENNIUM
-    st.title('Upload da imagem')
+    
     pfimg = st.file_uploader(label='upload', label_visibility = "hidden")
     
     if pfimg is not None:
@@ -99,22 +99,15 @@ def Picket_Fence():
         else:
             nomepdf = 'PF_' + Unit +'_' + data_teste +'.pdf'
             
-            #Gerar pdf
-
-        col3, col4 = st.columns(2)
-        with col3:
-            printpdf = st.button("Gerar pdf")
-        with col4:    
-            if printpdf:
-                #img_logo= Image.open('logoinrad.png')
-                pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
-                with open("res.pdf", "rb") as pdf_file:
-                    PDFbyte = pdf_file.read()
-                st.success("PDF Gerado")    
-                st.download_button(label="Download PDF",
-                                data=PDFbyte,
-                                file_name=nomepdf,
-                                mime='application/octet-stream')    
+        #Gerar pdf
+            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            with open("res.pdf", "rb") as pdf_file:
+                PDFbyte = pdf_file.read()
+            st.success("PDF Gerado")    
+            st.download_button(label="Download PDF",
+                            data=PDFbyte,
+                            file_name=nomepdf,
+                            mime='application/octet-stream')    
 
 
         st.title('Registrar dados')
@@ -162,7 +155,7 @@ def Picket_Fence():
 st.set_page_config(page_title="Picket Fence", page_icon="🚧")
 
 
-col1, col2, col3, col4, col5 = st.columns(spec=[0.15,0.18,0.2,0.2,0.2])
+col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
 with col1:
     if st.button("📋Registro"):
         st.switch_page("Hello.py")
@@ -184,12 +177,9 @@ st.header('', divider="blue")
 #logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
 #https://github.com/JSanry/teste-pylinac/blob/EXT/logoinrad.png
 htp="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" 
-colq, colw = st.columns(2)
-with colq:
-    st.markdown("# Picket Fence 🚧")
-with colw:
-    st.image( htp, width= 250)
-  
+
+
+st.markdown("# Picket Fence 🚧")
 
 st.sidebar.header("Picket Fence")
 #st.write("""Teste""")
