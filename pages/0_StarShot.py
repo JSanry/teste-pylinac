@@ -36,6 +36,8 @@ def Star_Shot():
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
 
+    Logo =st.sidebar.checkbox( label= 'Logo no PDF', value= True)
+
     #upload imagem
     #analise da imagem
     star_img = st.file_uploader(label="upload", label_visibility= "hidden")
@@ -63,9 +65,15 @@ def Star_Shot():
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
+            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam',"Outra opção..."), index= None)
+            if Unit == "Outra opção...":
+                Unit = st.text_input("Digite a Unidade...")
+
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'),index= None)
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus', "Outra opção..."),index= None)
+            if Fis == "Outra opção...":
+                Fis = st.text_input("Digite o operador...")
+
         with col3:
             Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
 
@@ -78,7 +86,10 @@ def Star_Shot():
             nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
        
         #Gerar pdf
-            my_star.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
+            if Logo:      
+                my_star.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
+            else:
+                my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.success("PDF gerado!")
