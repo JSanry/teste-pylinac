@@ -78,11 +78,7 @@ def Star_Shot():
             st.warning("Preencher campos de registro faltantes")
         else:
             nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
-       
-            
         #Gerar pdf
-        printpdf = st.button("Gerar pdf")
-        if printpdf:
             my_star.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
