@@ -8,4 +8,4 @@ streamlit-extras
 pylinac
 fpdf
 datetime
-
+streamlit-navigation-bar

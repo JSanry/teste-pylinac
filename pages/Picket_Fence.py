@@ -26,8 +26,12 @@ from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def Picket_Fence():
+def show_PF():
 
+
+    st.markdown("# Picket Fence 🚧")
+
+    st.sidebar.header("Picket Fence")
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.05, max_value=1.5, value=0.15)
     a_tol = st.sidebar.number_input(label='Ação de Tolerancia',step=0.05,format="%.2f",min_value=0.05, max_value=1.5, value=0.1)
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
@@ -153,38 +157,4 @@ def Picket_Fence():
                     conn.update(worksheet="PicketFence", data=updated_df)
                     st.success("Registro feito!")  
 
-st.set_page_config(page_title="Picket Fence", page_icon="🚧")
 
-
-col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
-with col1:
-    if st.button("📋Registro"):
-        st.switch_page("Hello.py")
-with col2:
-    if st.button("🎇Star Shot"):
-        st.switch_page("pages/0_StarShot.py")
-with col3:
-    if st.button("🎯Winston-Lutz"):
-        st.switch_page("pages/1_Winston-Lutz.py")
-with col4:
-    if st.button("🚧Picket Fence"):
-        st.switch_page("pages/2_Picket_Fence.py")
-with col5:
-    if st.button("🔲Field Analysis"):
-        st.switch_page("pages/3_Field_Analysis.py")
-st.header('', divider="blue")
-
-#logo_img= Image.open('/mount/src/teste-pylinac/logoinrad.png')
-#logo_img= Image.open('/workspaces/teste-pylinac/logoinrad.png')
-#https://github.com/JSanry/teste-pylinac/blob/EXT/logoinrad.png
-htp="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" 
-
-
-st.markdown("# Picket Fence 🚧")
-
-st.sidebar.header("Picket Fence")
-#st.write("""Teste""")
-
-Picket_Fence()
-
-show_code(Picket_Fence)

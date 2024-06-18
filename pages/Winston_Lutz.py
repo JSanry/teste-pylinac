@@ -28,8 +28,11 @@ from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def WL():
-    #st.write("Here's our first attempt at using data to create a table:")
+def show_WL():
+    st.markdown("# Winston-Lutz 🎯")
+
+
+    st.sidebar.header("Winston-Lutz")
 
     #tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=15.0, value=2.0)
@@ -160,35 +163,4 @@ def WL():
 
         st.dataframe(tb,hide_index=True)
             
-   
-st.set_page_config(page_title="Winston-Lutz", page_icon="🎯")
 
-logo_img= "https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" 
-st.logo(logo_img)
-
-col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
-with col1:
-    if st.button("📋Registro"):
-        st.switch_page("Hello.py")
-with col2:
-    if st.button("🎇Star Shot"):
-        st.switch_page("pages/0_StarShot.py")
-with col3:
-    if st.button("🎯Winston-Lutz"):
-        st.switch_page("pages/1_Winston-Lutz.py")
-with col4:
-    if st.button("🚧Picket Fence"):
-        st.switch_page("pages/2_Picket_Fence.py")
-with col5:
-    if st.button("🔲Field Analysis"):
-        st.switch_page("pages/3_Field_Analysis.py")
-st.header('', divider="blue")
-st.markdown("# Winston-Lutz 🎯")
-
-
-st.sidebar.header("Winston-Lutz")
-#st.write("""Teste""")
-
-WL()
-
-show_code(WL)
