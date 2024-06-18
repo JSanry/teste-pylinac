@@ -37,6 +37,7 @@ def show_SS():
     #Parametros analise
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
+    sid_image = st.sidebar.number_input(label='SID (mm)',step=10.0,format="%.1f",min_value=100.0, max_value=2000.0, value=1000.0)
 
     Logo =st.sidebar.checkbox( label= 'Logo no PDF', value= True)
 
@@ -44,7 +45,7 @@ def show_SS():
     #analise da imagem
     star_img = st.file_uploader(label="upload", label_visibility= "hidden")
     if star_img is not None:
-        my_star = Starshot(star_img, dpi=100, sid=1000)
+        my_star = Starshot(star_img, dpi=100, sid=sid_image)
         my_star.analyze(radius=r, tolerance=tol)
         data = my_star.results_data()
         if data.passed:
