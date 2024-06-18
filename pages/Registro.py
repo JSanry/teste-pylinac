@@ -30,36 +30,11 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 
 def show_registro():
-    st.set_page_config(
-        page_title="TESTES Pylinac",
-        page_icon="📋", initial_sidebar_state="collapsed"
-    )
+    
     #image = Image.open('logoinrad.png')
 
-    col1, col2, col3, col4, col5 = st.columns(spec=[0.16,0.16,0.2,0.19,0.2])
-    with col1:
-        if st.button("📋Registro"):
-            st.switch_page("Hello.py")
-    with col2:
-        if st.button("🎇Star Shot"):
-            st.switch_page("pages/0_StarShot.py")
-    with col3:
-        if st.button("🎯Winston-Lutz"):
-            st.switch_page("pages/1_Winston-Lutz.py")
-    with col4:
-        if st.button("🚧Picket Fence"):
-            st.switch_page("pages/2_Picket_Fence.py")
-    with col5:
-        if st.button("🔲Field Analysis"):
-            st.switch_page("pages/3_Field_Analysis.py")
-
-    st.header('', divider="blue")
-
-    #st.image(image, caption='Sunrise by the mountains')
-    st.write("# Registro dos Testes  📋")
-
-    st.sidebar.success("Selecione Testes Acima")
     
+    st.write("# Registro dos Testes  📋")
     
     # Constantes
     FISICOS = [
