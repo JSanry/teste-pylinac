@@ -31,7 +31,7 @@ import pages as pg
 
 st.set_page_config(initial_sidebar_state="collapsed")
 
-pages = ["StarShot 🎇", "Winston-Lutz", "Picket Fence", "Field Analysis", "Registro"]
+pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis", "Registro"]
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 logo_path = os.path.join(parent_dir, "logo.svg")
 styles = {
@@ -67,7 +67,8 @@ page = st_navbar(
 )
 
 functions = {
-    "StarShot 🎇": pg.show_SS,
+    "Home": pg.show_home,
+    "StarShot": pg.show_SS,
     "Winston-Lutz": pg.show_WL,
     "Picket Fence":pg.show_PF,
     "Field Analysis":pg.show_FA,
@@ -79,6 +80,9 @@ functions = {
 go_to = functions.get(page)
 if go_to:
     go_to()
+
+
     
 with st.sidebar:
-    st.write("Sidebar")
+    st.write("Testes")
+    
