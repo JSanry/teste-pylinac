@@ -36,7 +36,8 @@ parent_dir = os.path.dirname(os.path.abspath(__file__))
 logo_path = os.path.join(parent_dir, "logo.svg")
 styles = {
     "nav": {
-        "background-color": "#e4e7ff",
+        #"background-color": "#e4e7ff", 
+        "background-color": "#0099cc",
         "justify-content": "left",
         "primary-color": "#001cff"
     },
@@ -49,7 +50,8 @@ styles = {
     },
     "active": {
         "background-color": "white",
-        "color": "var(--text-color)",
+        #"color": "var(--text-color)",
+        "color": "#0099cc",
         "font-weight": "bold",
         "padding": "14px",
     }
