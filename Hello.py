@@ -29,7 +29,8 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 import pages as pg
 
 
-st.set_page_config(initial_sidebar_state="collapsed")
+st.set_page_config( page_title="Testes Pylinac",
+        page_icon="📋",initial_sidebar_state="collapsed")
 
 pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis", "Registro"]
 parent_dir = os.path.dirname(os.path.abspath(__file__))
@@ -85,6 +86,6 @@ if go_to:
 
 
     
-with st.sidebar:
-    st.write("Testes")
+#with st.sidebar:
+#    st.write("Em desenvolvimento por João Rivera")
     
