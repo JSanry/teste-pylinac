@@ -30,7 +30,7 @@ import pages as pg
 
 
 st.set_page_config( page_title="Testes Pylinac",
-        page_icon="📋",initial_sidebar_state="collapsed")
+        page_icon="☢️",initial_sidebar_state="collapsed")
 
 pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis", "Registro"]
 parent_dir = os.path.dirname(os.path.abspath(__file__))
@@ -58,8 +58,10 @@ styles = {
     }
 }
 options = {
-    "show_menu": True,
+    "show_menu": False,
     "show_sidebar": True,
+    "hide_nav": True,
+
 }
 
 page = st_navbar(
@@ -89,3 +91,4 @@ if go_to:
 #with st.sidebar:
 #    st.write("Em desenvolvimento por João Rivera")
     
+
