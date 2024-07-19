@@ -75,10 +75,10 @@ functions = {
     "Home": pg.show_home,
     "StarShot": pg.show_SS,
     "Winston-Lutz": pg.show_WL,
-    "Picket Fence":pg.show_PF,
-    "Field Analysis":pg.show_FA,
-    "CatPhan":pg.show_CP,
-    "Registro":pg.show_registro,
+    "Picket Fence": pg.show_PF,
+    "Field Analysis": pg.show_FA,
+    "CatPhan": pg.show_CP,
+    "Registro": pg.show_registro,
 
 }
 
