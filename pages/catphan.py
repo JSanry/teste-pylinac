@@ -19,14 +19,11 @@ import pandas as pd
 def show_CP():
 
 
-    st.markdown("# CatPhan 🚧")
+    st.markdown("# CatPhan ⚪")
 
     type_catphan = st.sidebar.selectbox('CatPhan',('CatPhan503', 'CatPhan504', 'CatPhan600'))
     
     img_cp = st.file_uploader('upload', accept_multiple_files=True, label_visibility= "hidden")
-
-    dia = st.date_input("Data de realização do teste:", value= date.today())    
-    data_teste = dia.strftime("%d_%m_%Y")
 
     if len(img_cp)<2:
         st.warning("Selecionar todas as imagens!")
@@ -43,6 +40,11 @@ def show_CP():
         cat.analyze()
         st.write(cat.results())
 
+        data = cat.results_data()
+
+        st.write("Porcentagem laminas passando:" , "%.3f" %data.ctp404.measured_slice_thickness_mm, "mm")
+
+
 
         cat.save_analyzed_image("cp.png")
         img_rescp= Image.open('cp.png')
@@ -51,31 +53,28 @@ def show_CP():
 
         st.title('Defenições PDF')
             
-        #col1, col2, col3 = st.columns(3)
-        #with col1:
-        #    Unit = st.selectbox('Unidade',('CT', 'True Beam'), index= None)
-        #with col2:
-        #    Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
-        #with col3:
-        #    dia = st.date_input("Data de realização do teste:", value= date.today())    
-        #    data_teste = dia.strftime("%d_%m_%Y")
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            Unit = st.selectbox('Unidade',('CT', 'True Beam'), index= None)
+        with col2:
+            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
+        with col3:
+            dia = st.date_input("Data de realização do teste:", value= date.today())    
+            data_teste = dia.strftime("%d_%m_%Y")
 
-        #if not Unit or not Fis:
-            #st.warning("Preencher campos de registro faltantes")
-        Unit= "CT"
-        Fis = "fis"
-        nomepdf = 'CP_' + Unit + '_' + data_teste +'.pdf'
+        if not Unit or not Fis:
+            st.warning("Preencher campos de registro faltantes")
+        else:
+            nomepdf = 'CP_' + Unit + '_' + data_teste +'.pdf'
+
+            cat.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            with open("res.pdf", "rb") as pdf_file:
+                PDFbyte = pdf_file.read()
+            st.download_button(label="Download PDF",
+                                data=PDFbyte,
+                                file_name=nomepdf,
+                                mime='application/octet-stream') 
         
-            #Gerar pdf
-
-        cat.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
-        with open("res.pdf", "rb") as pdf_file:
-            PDFbyte = pdf_file.read()
-        st.download_button(label="Download PDF",
-                            data=PDFbyte,
-                            file_name=nomepdf,
-                            mime='application/octet-stream') 
-    
             
    
 

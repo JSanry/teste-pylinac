@@ -76,6 +76,7 @@ def show_PF():
         st.write("Porcentagem laminas passando:" , "%.3f" %data.percent_leaves_passing, "%")
         st.write("Erro absoluto médio:" , "%.3f" %data.absolute_median_error_mm, "mm")
         st.write("O erro máximo é:" , "%.3f" %data.max_error_mm, "mm, na lamina", "%.0f" %data.max_error_leaf, " no picket", "%.0f" %data.max_error_picket)
+        
        
         
         pf.save_analyzed_image("pf.png")
