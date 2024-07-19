@@ -6,3 +6,4 @@ from pages.catphan import show_CP
 from pages.Registro import show_registro
 from pages.home import show_home
 from pages.leedstor import show_LD
+from pages.lasvegas import show_LV

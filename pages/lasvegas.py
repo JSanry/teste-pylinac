@@ -8,7 +8,7 @@ from fpdf import FPDF
 import matplotlib.pyplot as plt
 
 
-from pylinac import LeedsTOR
+from pylinac import LasVegas
 
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
@@ -16,12 +16,12 @@ from streamlit.hello.utils import show_code
 import pandas as pd
 
 
-def show_LD():
+def show_LV():
 
 
-    st.markdown("# Leeds TOR ⚪")
+    st.markdown("# Las Vegas 🎲")
 
-    st.sidebar.header("LeedsTOR")
+    st.sidebar.header("Las Vegas")
     low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.099, value=0.010)
     hg_th = st.sidebar.number_input(label='high  contrast threshold',step=0.05,format="%.2f",min_value=0.01, max_value=1.50, value=0.05)
     ssd_auto = st.sidebar.checkbox(label= 'SSD auto', value=True)
@@ -31,15 +31,15 @@ def show_LD():
         ssd_input = st.sidebar.number_input(label='SDD (mm)',step=1.0 ,format="%.1f",min_value=700.0, max_value=1900.0, value=1000.0)
 
     
-    img_ld = st.file_uploader('upload', label_visibility= "hidden")
+    img_lv = st.file_uploader('upload', label_visibility= "hidden")
 
-    if img_ld is not None:  
-        leeds = LeedsTOR(img_ld)
-        leeds.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, ssd=ssd_input)
+    if img_lv is not None:  
+        las= LasVegas(img_ld)
+        las.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, ssd=ssd_input)
 
-        leeds.save_analyzed_image("img_leeds")
-        img_resl= Image.open('img_leed')
-        st.image(img_resl, output_format="auto")
+        las.save_analyzed_image("img_lv")
+        img_reslv= Image.open('img_lv')
+        st.image(img_reslv, output_format="auto")
 
 
         st.title('Defenições PDF')
@@ -56,9 +56,9 @@ def show_LD():
         if not Unit or not Fis:
             st.warning("Preencher campos de registro faltantes")
         else:
-            nomepdf = 'LeedsTOR_' + Unit + '_' + data_teste +'.pdf'
+            nomepdf = 'LasVegas_' + Unit + '_' + data_teste +'.pdf'
 
-            leeds.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            las.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
