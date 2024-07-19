@@ -81,9 +81,7 @@ def show_FA():
              st.write("Simetria Vertical:" , "%.3f" %data.protocol_results["symmetry_vertical"])
              st.write("Simetria Horizontal:" , "%.3f" %data.protocol_results["symmetry_horizontal"]) 
 
-        #fa.save_analyzed_image("r.png", split_plots = False)
-        #img_res= Image.open('r.png')
-        #st.image(img_res, output_format="auto")
+       
         
     
         st.title('Defenições PDF')

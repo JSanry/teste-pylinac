@@ -32,7 +32,7 @@ import pages as pg
 st.set_page_config( page_title="Testes Pylinac",
         page_icon="☢️",initial_sidebar_state="collapsed")
 
-pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis","CatPhan", "Registro"]
+pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis","CatPhan","Leeds TOR" ,"Registro"]
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 logo_path = os.path.join(parent_dir, "logo.svg")
 styles = {
@@ -78,6 +78,7 @@ functions = {
     "Picket Fence": pg.show_PF,
     "Field Analysis": pg.show_FA,
     "CatPhan": pg.show_CP,
+    "Leeds TOR": pg.show_LD,
     "Registro": pg.show_registro,
 
 }

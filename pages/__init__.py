@@ -5,3 +5,4 @@ from pages.Field_Analysis import show_FA
 from pages.catphan import show_CP
 from pages.Registro import show_registro
 from pages.home import show_home
+from pages.leedstor import show_LD
