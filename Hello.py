@@ -58,7 +58,7 @@ styles = {
     }
 }
 options = {
-    "show_menu": False,
+    "show_menu": True,
     "show_sidebar": True,
     "hide_nav": True,
 
@@ -77,7 +77,9 @@ functions = {
     "Winston-Lutz": pg.show_WL,
     "Picket Fence":pg.show_PF,
     "Field Analysis":pg.show_FA,
+    "CatPhan":pg.show_CP,
     "Registro":pg.show_registro,
+
 }
 
 
