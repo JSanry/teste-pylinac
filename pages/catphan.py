@@ -44,7 +44,9 @@ def show_CP():
         st.write(cat.results())
 
 
-
+        cat.save_analyzed_image("cp.png")
+        img_rescp= Image.open('cp.png')
+        st.image(img_rescp, output_format="auto")
 
 
         st.title('Defenições PDF')
