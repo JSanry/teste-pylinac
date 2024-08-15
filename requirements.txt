@@ -2,7 +2,7 @@ altair
 numpy==1.26.4
 pandas
 pydeck
-streamlit==1.30
+streamlit==1.33
 st-gsheets-connection
 streamlit-extras
 pylinac
