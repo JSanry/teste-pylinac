@@ -38,7 +38,7 @@ def show_LD():
         leeds.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, ssd=ssd_input)
 
         leeds.save_analyzed_image("img_leeds")
-        img_resl= Image.open('img_leed')
+        img_resl= Image.open('img_leeds.png')
         st.image(img_resl, output_format="auto")
 
 
