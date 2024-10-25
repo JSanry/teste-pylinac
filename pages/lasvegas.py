@@ -34,11 +34,11 @@ def show_LV():
     img_lv = st.file_uploader('upload', label_visibility= "hidden")
 
     if img_lv is not None:  
-        las= LasVegas(img_ld)
+        las= LasVegas(img_lv)
         las.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, ssd=ssd_input)
 
-        las.save_analyzed_image("img_lv")
-        img_reslv= Image.open('img_lv')
+        las.save_analyzed_image("img_lv_a")
+        img_reslv= Image.open('img_lv_a')
         st.image(img_reslv, output_format="auto")
 
 

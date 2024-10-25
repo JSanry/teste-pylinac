@@ -8,7 +8,7 @@ from fpdf import FPDF
 import matplotlib.pyplot as plt
 
 
-from pylinac import CatPhan503, CatPhan504, CatPhan600
+from pylinac import CatPhan503, CatPhan504, CatPhan600, CatPhan604
 
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
@@ -23,7 +23,7 @@ def show_CP():
 
     st.sidebar.header("CatPhan")
 
-    type_catphan = st.sidebar.selectbox('CatPhan',('CatPhan503', 'CatPhan504', 'CatPhan600'))
+    type_catphan = st.sidebar.selectbox('CatPhan',('CatPhan503', 'CatPhan504', 'CatPhan600',  'CatPhan604'))
     
     img_cp = st.file_uploader('upload', accept_multiple_files=True, label_visibility= "hidden")
 
@@ -33,6 +33,9 @@ def show_CP():
        
         if type_catphan == "CatPhan503":
             cat = CatPhan503(img_cp)
+
+        elif type_catphan == "CatPhan604":
+            cat = CatPhan604(img_cp)
 
         elif type_catphan == "CatPhan504":
             cat = CatPhan504(img_cp)
