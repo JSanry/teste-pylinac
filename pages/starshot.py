@@ -45,11 +45,17 @@ def show_SS():
 
     #upload imagem
     #analise da imagem
-    star_img = st.file_uploader(label="upload", label_visibility= "hidden")
-    if star_img is not None:
+    star_img = st.file_uploader('upload', accept_multiple_files=True, label_visibility= "hidden")
+    #star_img = st.file_uploader(label="upload", label_visibility= "hidden")
+    if star_img is not None and len(star_img)==1:
         my_star = Starshot(star_img, dpi=dpi_inp, sid=sid_inp)
         my_star.analyze(radius=r, tolerance=tol, recursive=r_input)
         data = my_star.results_data()
+    elif star_img is not None and len(star_img)>=2:
+        my_star = Starshot.from_multiple_images(star_img,dpi=dpi_inp, sid=sid_inp)
+        my_star.analyze(radius=r, tolerance=tol, recursive=r_input)
+        data = my_star.results_data()
+
         if data.passed:
             st.markdown("### Resultado Passou ")
         else:
