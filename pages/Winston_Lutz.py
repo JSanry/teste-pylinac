@@ -40,6 +40,7 @@ def show_WL():
     names =st.sidebar.checkbox('Usar Nome de Arquivos', value= True)
 
     
+    st.sidebar.header("Coordenadas Inicias")
     VRT = st.sidebar.number_input(label='VRT',step=0.5,format="%.1f",min_value=-100.0, max_value=100.0, value=0.0)
     LNG = st.sidebar.number_input(label='LNG',step=0.5,format="%.1f",min_value=-100.0, max_value=100.0, value=0.0)
     LAT = st.sidebar.number_input(label='LAT',step=0.5,format="%.1f",min_value=-100.0, max_value=100.0, value=0.0)
@@ -68,65 +69,7 @@ def show_WL():
 
         inst= wl.bb_shift_instructions(couch_vrt=VRT, couch_lng=LNG, couch_lat=LAT)
         st.write(inst)
-        #Calula e plota tabela deslocamentos cada imagem
-        t=[[],[],[],[],[],[]]
-        soma=[0,0,0,0,0,0]
-
-        for i in range(len(wl.images)):
-            G = wl.images[i].gantry_angle
-            C = wl.images[i].collimator_angle
-            M = wl.images[i].couch_angle
-            xV = wl.images[i].cax2bb_vector.x
-            yV = wl.images[i].cax2bb_vector.y
-            t[0].append(round(G,1))
-            t[1].append(round(C,1))
-            t[2].append(round(M,1))
-            if M != 0:
-                if unid == 'VARIAN':    #coordenadas VARIAN 
-                    x=(round(-xV*math.cos(math.radians(M))-yV*math.sin(math.radians(M)),4))
-                else:   #coordenadas ELEKTA
-                    x=(round(xV*math.cos(math.radians(M))+yV*math.sin(math.radians(M)),4))
-                y=(round(-xV*math.sin(math.radians(M))+yV*math.cos(math.radians(M)),4))
-                z="--"
-            #elif G == 270 or G == 90:
-            else:
-                x=(round(-xV*math.cos(math.radians(G)),4))
-                y=yV
-                z=(round(-xV*math.sin(math.radians(G)),4))
-            #else:
-            #    x=(round(xV,3))
-            #    y=yV
-            #    z="--"
-            t[3].append(x)
-            t[4].append(y)
-            t[5].append(z)
-
-            if x != "--" and x != 0:
-                soma[0]+=x
-                soma[1]+=1
-            soma[2]+=y
-            soma[3]+=1
-            if z != "--" and z != 0:
-                soma[4]+=z
-                soma[5]+=1
-        t[0].append("--")
-        t[1].append("--")
-        t[2].append("Média")
-        t[3].append(round(soma[0]/soma[1],2))
-        t[4].append(round(soma[2]/soma[3],2))
-        try:
-            t[5].append(round(soma[4]/soma[5],2))
-        except:
-            t[5].append(round(soma[4],2))
-        tb = pd.DataFrame({
-        'Gantry': t[0],
-        'Colimador': t[1],
-        'Mesa': t[2],
-        'LAT x (mm)': t[3],
-        'LONG y (mm)': t[4],
-        'VERT z (mm)': t[5],
-        })
-
+    
         
 
         img_g= Image.open('g.png')
@@ -136,31 +79,35 @@ def show_WL():
         img_m= Image.open('m.png')
         st.image(img_m, output_format="auto") 
 
-        st.title('Defenições PDF')
+    
+        #Definições para PDF 
+        st.sidebar.header("Definições PDF")
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
+            Unit = st.sidebar.text_input("Digite a máquina", value="Linac" ,placeholder= "Linac")
+
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
+            Fis = st.sidebar.text_input("Digite o operador", value="Físico" ,placeholder= "Fis")
+
         with col3:
-            dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d_%m_%Y")
+            dia = st.sidebar.date_input("Data de realização do teste:", value= date.today())    
+            data_teste = dia.strftime("%m-%d-%Y")
 
         if not Unit or not Fis:
-            st.warning("Preencher campos de registro faltantes")
+            st.sidebar.warning("Preencher campos de registro faltantes")
         else:
             nomepdf = 'WL_' + Unit + '_' + data_teste +'.pdf'
+       
         #Gerar pdf
-
+            
             wl.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
-            st.download_button(label="Download PDF",
+            st.sidebar.success("PDF gerado!")
+            st.sidebar.download_button(label="Download PDF",
                                data=PDFbyte,
                                file_name=nomepdf,
-                               mime='application/octet-stream') 
-
-        st.dataframe(tb,hide_index=True)
+                               mime='application/octet-stream')
             
 
