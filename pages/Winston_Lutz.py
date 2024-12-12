@@ -38,6 +38,7 @@ def show_WL():
     bib_size = st.sidebar.number_input(label='Bib Size mm',step=0.5,format="%.1f",min_value=0.1, max_value=15.0, value=2.0)
     unid = st.sidebar.selectbox('Unidade',('VARIAN', 'ELEKTA'))
     names =st.sidebar.checkbox('Usar Nome de Arquivos', value= True)
+    shift =st.sidebar.checkbox('Aplicar Shift Virtual', value= False)
 
     
     st.sidebar.header("Coordenadas Inicias")
@@ -54,9 +55,9 @@ def show_WL():
     elif len(img_wl)>=2:
         wl = WinstonLutz(img_wl,use_filenames=names)
         if unid == 'VARIAN':
-            wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.VARIAN_IEC)
+            wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.VARIAN_IEC, apply_virtual_shift= shift)
         else:
-            wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.ELEKTA_IEC)
+            wl.analyze(bb_size_mm=bib_size, machine_scale= MachineScale.ELEKTA_IEC, apply_virtual_shift= shift)
         data = wl.results_data() 
 
         wl.save_images("g.png", axis='Gantry')
@@ -69,7 +70,8 @@ def show_WL():
 
         inst= wl.bb_shift_instructions(couch_vrt=VRT, couch_lng=LNG, couch_lat=LAT)
         st.write(inst)
-    
+
+        
         
 
         img_g= Image.open('g.png')
