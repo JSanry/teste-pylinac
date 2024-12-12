@@ -136,12 +136,10 @@ def show_SS():
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.sidebar.selectbox('Unidade',('iX', '6EX', 'True Beam',"Outra opção..."), index= None)
-            if Unit == "Outra opção...":
-                Unit = st.sidebar.text_input("Digite a Unidade...")
+            Unit = st.sidebar.text_input("Digite a máquina", value="Linac" ,placeholder= "Linac")
 
         with col2:
-            Fis = st.sidebar.text_input("Físico", value="Físico" ,placeholder= "Fis")
+            Fis = st.sidebar.text_input("Digite o operador", value="Físico" ,placeholder= "Fis")
 
         with col3:
             Par = st.sidebar.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
