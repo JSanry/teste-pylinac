@@ -131,28 +131,28 @@ def show_SS():
         img_star= Image.open('mystar.png')
         st.image(img_star, output_format="auto")
         
-        #Definições para PDF e Registro
-        st.title('Defenições PDF')
+        #Definições para PDF 
+        st.sidebar.header("Definições PDF")
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam',"Outra opção..."), index= None)
+            Unit = st.sidebar.selectbox('Unidade',('iX', '6EX', 'True Beam',"Outra opção..."), index= None)
             if Unit == "Outra opção...":
-                Unit = st.text_input("Digite a Unidade...")
+                Unit = st.sidebar.text_input("Digite a Unidade...")
 
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus', "Outra opção..."),index= None)
+            Fis = st.sidebar.selectbox('Físico',('Laura', 'Victor', 'Marcus', "Outra opção..."),index= None)
             if Fis == "Outra opção...":
-                Fis = st.text_input("Digite o operador...")
+                Fis = st.sidebar.text_input("Digite o operador...")
 
         with col3:
-            Par = st.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
+            Par = st.sidebar.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
 
-        dia = st.date_input("Data de realização do teste:", value= date.today())    
+        dia = st.sidebar.date_input("Data de realização do teste:", value= date.today())    
         data_teste = dia.strftime("%m-%d-%Y")
 
         if not Unit or not Par or not Fis:
-            st.warning("Preencher campos de registro faltantes")
+            st.sidebar.warning("Preencher campos de registro faltantes")
         else:
             nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
        
@@ -163,49 +163,13 @@ def show_SS():
                 my_star.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
-            st.success("PDF gerado!")
-            st.download_button(label="Download PDF",
+            st.sidebar.success("PDF gerado!")
+            st.sidebar.download_button(label="Download PDF",
                                data=PDFbyte,
                                file_name=nomepdf,
                                mime='application/octet-stream')   
         
-        st.title('Registrar dados')
-        # Estabelece conexao Google Sheets 
-        conn = st.connection("gsheets", type=GSheetsConnection)   
-
-        # Toma dados atuais
-        existing_data = conn.read(worksheet="StarShot", usecols=list(range(6)), ttl=5)
-        existing_data = existing_data.dropna(how="all")
-
-        #botao registro
-        registro_button = st.button("Registrar dados")
-
-        if registro_button:
-                #checar se campos necessarios preenchidos
-                if not Unit or not Par or not Fis:
-                    st.warning("Preencher campos de registro faltantes")
-                # condiçao evitar registros repetidos - avaliar melhor forma de fazer
-                #elif existing_data["Data"].str.contains(data_teste).any():
-                #    st.warning("A vendor with this company name already exists.")
-                else:
-                    teste_data = pd.DataFrame(
-                        [
-                            {
-                                "Data": data_teste,
-                                "Parametro": Par,
-                                "Diametro":  "%.3f" %data.circle_diameter_mm,
-                                "RaioAnalise": r ,
-                                "Aparelho": Unit ,
-                                "Fisico": Fis,
-                                
-                            }
-                        ]
-                    )
-                    updated_df = pd.concat([existing_data, teste_data], ignore_index=True)
-                    conn.update(worksheet="StarShot", data=updated_df)
-                    st.success("Registro feito!")
-
-
+       
 
 
 

@@ -40,7 +40,11 @@ styles = {
         #"background-color": "#e4e7ff", 
         "background-color": "#0099cc",
         "justify-content": "left",
-        "primary-color": "#001cff"
+        "primary-color": "#001cff",
+        "display": "flex",
+        "height": "2.85rem",
+        "padding-left": "20rem",
+        "padding-right": "2rem",
     },
     "img": {
         "padding-right": "14px",
