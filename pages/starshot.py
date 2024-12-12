@@ -35,7 +35,7 @@ def show_SS():
     st.sidebar.header("Star Shot")
 
     #Parametros analise
-    tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=1.0, value=0.8)
+    tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=2.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
     dpi_inp = st.sidebar.number_input(label='DPI',step=1.0 ,format="%.1f",min_value=80.0, max_value=200.0, value=100.0)
     sid_inp = st.sidebar.number_input(label='SID (mm)',step=1.0 ,format="%.1f",min_value=700.0, max_value=1900.0, value=1000.0)
@@ -141,9 +141,7 @@ def show_SS():
                 Unit = st.sidebar.text_input("Digite a Unidade...")
 
         with col2:
-            Fis = st.sidebar.selectbox('Físico',('Laura', 'Victor', 'Marcus', "Outra opção..."),index= None)
-            if Fis == "Outra opção...":
-                Fis = st.sidebar.text_input("Digite o operador...")
+            Fis = st.sidebar.text_input("Físico", value="Físico" ,placeholder= "Fis")
 
         with col3:
             Par = st.sidebar.selectbox('Parâmetro',('Gantry','Mesa', 'Col' ),index= None)
