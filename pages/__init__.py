@@ -3,7 +3,6 @@ from pages.Winston_Lutz import show_WL
 from pages.Picket_Fence import show_PF
 from pages.Field_Analysis import show_FA
 from pages.catphan import show_CP
-from pages.Registro import show_registro
 from pages.home import show_home
 from pages.leedstor import show_LD
 from pages.lasvegas import show_LV
