@@ -88,74 +88,40 @@ def show_PF():
             img_prof= Image.open('profile.png')
             st.image(img_prof, output_format="auto")
         
-        st.title('Defenições PDF')
+        #Definições para PDF 
+        st.sidebar.header("Definições PDF")
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'),index= None)
+            Unit = st.sidebar.text_input("Digite a máquina", value="Linac" ,placeholder= "Linac")
+
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'),index= None)
+            Fis = st.sidebar.text_input("Digite o operador", value="Físico" ,placeholder= "Fis")
+
         with col3:
-            #today = date.today()
-            dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d-%m-%Y")
-           
+            dia = st.sidebar.date_input("Data de realização do teste:", value= date.today())    
+            data_teste = dia.strftime("%m-%d-%Y")
+
         if not Unit or not Fis:
-            st.warning("Preencher campos de registro faltantes")
+            st.sidebar.warning("Preencher campos de registro faltantes")
         else:
-            nomepdf = 'PF_' + Unit +'_' + data_teste +'.pdf'
-            
+            nomepdf = 'PF_' + Unit + '_' + data_teste +'.pdf'
+       
         #Gerar pdf
-            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            
+            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
-            st.success("PDF Gerado")    
-            st.download_button(label="Download PDF",
-                            data=PDFbyte,
-                            file_name=nomepdf,
-                            mime='application/octet-stream')    
-
-
-        st.title('Registrar dados')
+            st.sidebar.success("PDF gerado!")
+            st.sidebar.download_button(label="Download PDF",
+                               data=PDFbyte,
+                               file_name=nomepdf,
+                               mime='application/octet-stream')
         
-        # Estabelece conexao Google Sheets 
-        conn = st.connection("gsheets", type=GSheetsConnection)   
+        
+        
+        
 
-        # Toma dados atuais
-        existing_data = conn.read(worksheet="PicketFence", usecols=list(range(9)), ttl=5)
-        existing_data = existing_data.dropna(how="all")
 
-        #botao registro
-        registro_button = st.button("Registrar dados")
-
-        if registro_button:
-                #checar se campos necessarios preenchidos
-                if not Unit or not Fis:
-                    st.warning("Preencher campos de registro faltantes")
-                # condiçao evitar registros repetidos - avaliar melhor forma de fazer
-                #elif existing_data["Data"].str.contains(data_teste).any():
-                #    st.warning("A vendor with this company name already exists.")
-                
-                else:
-                    separador= ','
-                    teste_data = pd.DataFrame(
-                        [
-                            {
-                                "Data": data_teste,
-                                "Tolerancia": tol,
-                                "Laminas Passando": "%.3f" %data.percent_leaves_passing,
-                                "Erro Absoluto Medio": "%.3f" %data.absolute_median_error_mm ,
-                                "Erro Maximo" : "%.3f" %data.max_error_mm,
-                                "Lamina Maximo": "%.0f" %data.max_error_leaf,
-                                "Laminas Falhando": separador.join(map(str,data.failed_leaves)),
-                                "Aparelho": Unit ,
-                                "Fisico": Fis,
-                                
-                            }
-                        ]
-                    )
-                    updated_df = pd.concat([existing_data, teste_data], ignore_index=True)
-                    conn.update(worksheet="PicketFence", data=updated_df)
-                    st.success("Registro feito!")  
-
+        
 
