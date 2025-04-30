@@ -34,7 +34,7 @@ st.set_page_config( page_title="Testes Pylinac",
 
 pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis","CatPhan","Leeds TOR" , "Las Vegas"]
 parent_dir = os.path.dirname(os.path.abspath(__file__))
-logo_path = os.path.join(parent_dir, "logo.svg")
+logo_path = os.path.join(parent_dir, "logoN.svg")
 styles = {
     "nav": {
         #"background-color": "#e4e7ff", 
