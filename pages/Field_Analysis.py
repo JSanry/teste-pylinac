@@ -37,6 +37,8 @@ def show_FA():
 
     fff =st.sidebar.checkbox('Campo FFF')
 
+    inv_input = st.sidebar.checkbox (label="Inver", value= False)
+
     if protocol=="VARIAN":
         var_protocolo= Protocol.VARIAN
     else:
@@ -66,7 +68,9 @@ def show_FA():
         interpolation_resolution_mm= interpol_res,
         edge_detection_method= var_edge,   
         is_FFF=fff,
-        in_field_ratio= ratio_field)
+        in_field_ratio= ratio_field,
+        invert= inv_input
+        )
 
         data = fa.results_data()
         

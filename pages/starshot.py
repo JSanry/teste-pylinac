@@ -50,11 +50,11 @@ def show_SS():
     if multiple:
         star_img = st.file_uploader('upload', accept_multiple_files=True, label_visibility= "hidden")
     else:
-        star_img = st.file_uploader(label="upload", label_visibility= "hidden")
+        star_img = st.file_uploader(label="upload", accept_multiple_files=False, label_visibility= "hidden")
 
     if star_img is not None and not(multiple):
         my_star = Starshot(star_img, dpi=dpi_inp, sid=sid_inp)
-        my_star.analyze(radius=r, tolerance=tol, recursive=r_input, min_peak_height = min_p)
+        my_star.analyze(radius=r, tolerance=tol,  min_peak_height = min_p, recursive=r_input,)
         data = my_star.results_data()
 
         if data.passed:
