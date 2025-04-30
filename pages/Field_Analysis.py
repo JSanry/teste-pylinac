@@ -37,7 +37,7 @@ def show_FA():
 
     fff =st.sidebar.checkbox('Campo FFF')
 
-    inv_input = st.sidebar.checkbox (label="Inver", value= False)
+    inv_input = st.sidebar.checkbox (label="Inverted", value= False)
 
     if protocol=="VARIAN":
         var_protocolo= Protocol.VARIAN
@@ -85,38 +85,36 @@ def show_FA():
              st.write("Simetria Vertical:" , "%.3f" %data.protocol_results["symmetry_vertical"])
              st.write("Simetria Horizontal:" , "%.3f" %data.protocol_results["symmetry_horizontal"]) 
 
-       
+
+        #Definições para PDF 
+        st.sidebar.header("Definições PDF")
         
-    
-        st.title('Defenições PDF')
-        
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', '6EX', 'True Beam'), index= None)
+            Unit = st.sidebar.text_input("Digite a máquina", value="Linac" ,placeholder= "Linac")
+
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
+            Fis = st.sidebar.text_input("Digite o operador", value="Físico" ,placeholder= "Fis")
+        
         with col3:
             var_campo = st.number_input(label='Tamanho de campo',step=1,min_value=1, max_value=40, value=10)
             Campo= str(var_campo)+'x'+ str(var_campo)
-        with col4:
-            #today = date.today()
-            dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d_%m_%Y")
-            
-            
+
+        dia = st.sidebar.date_input("Data de realização do teste:", value= date.today())    
+        data_teste = dia.strftime("%m-%d-%Y")
+
         if not Unit or not Fis:
             st.warning("Preencher campos de registro faltantes")
         else:
             nomepdf = 'Field_' + '_'+ Campo +'_' + Unit +'_' + data_teste +'.pdf'
         #Gerar pdf
-            fa.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
+            fa.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER/logoN.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.download_button(label="Download PDF",
                             data=PDFbyte,
                             file_name=nomepdf,
-                            mime='application/octet-stream')      
-                
+                            mime='application/octet-stream')    
         #s_img =st.checkbox('Imagens Separadas')
         #split= s_img
 
