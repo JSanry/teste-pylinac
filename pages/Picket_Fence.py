@@ -109,7 +109,7 @@ def show_PF():
        
         #Gerar pdf
             
-            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER/logoN.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.sidebar.success("PDF gerado!")
