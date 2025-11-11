@@ -62,7 +62,7 @@ def show_CP():
         with col1:
             Unit = st.selectbox('Unidade',('CT', 'Versa'), index= 1)
         with col2:
-            Fis = st.selectbox('Físico',('Fisico, 1'), index= 1)
+            Fis = st.selectbox('Físico',('Fisico', "1"), index= 1)
         with col3:
             dia = st.date_input("Data de realização do teste:", value= date.today())    
             data_teste = dia.strftime("%d_%m_%Y")
