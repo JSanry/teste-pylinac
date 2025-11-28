@@ -5,7 +5,7 @@ pydeck
 streamlit <= 1.37
 st-gsheets-connection
 streamlit-extras
-pylinac ==3.39 
+pylinac ==3.38 
 fpdf
 datetime
 streamlit-navigation-bar
