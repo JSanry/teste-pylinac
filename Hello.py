@@ -70,7 +70,7 @@ options = {
 
 page = st_navbar(
     pages,
-    logo_path=logo_path,
+    logo_path="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png",
     styles=styles,
     options=options,
 )
