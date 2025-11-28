@@ -34,13 +34,13 @@ st.set_page_config( page_title="Testes Pylinac",
 
 pages = ["StarShot", "Winston-Lutz", "Picket Fence", "Field Analysis","CatPhan","Leeds TOR" , "Las Vegas"]
 parent_dir = os.path.dirname(os.path.abspath(__file__))
-logo_path = os.path.join(parent_dir, "logoN.svg")
+logo_path = os.path.join(parent_dir, "logoDOR.svg")
 styles = {
     "nav": {
         #"background-color": "#e4e7ff", 
-        "background-color": "#0099cc",
+        "background-color": "#c4ae8084",
         "justify-content": "left",
-        "primary-color": "#001cff",
+        "primary-color": "#be9c40ce",
         "display": "flex",
         "height": "2.85rem",
         "padding-left": "20rem",
@@ -56,7 +56,7 @@ styles = {
     "active": {
         "background-color": "white",
         #"color": "var(--text-color)",
-        "color": "#0099cc",
+        "color": "#be9c40ce",
         "font-weight": "bold",
         "padding": "14px",
     }
@@ -70,7 +70,7 @@ options = {
 
 page = st_navbar(
     pages,
-    logo_path="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png",
+    logo_path=logo_path,
     styles=styles,
     options=options,
 )
