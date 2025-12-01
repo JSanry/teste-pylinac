@@ -56,29 +56,37 @@ def show_CP():
         st.image(img_rescp, output_format="auto")
 
 
-        st.title('Defenições PDF')
+       
             
+        #Definições para PDF 
+        st.sidebar.header("Definições PDF")
+        
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('CT', 'Versa'), index= 1)
+            Unit = st.sidebar.text_input("Digite a máquina", value="Versa" ,placeholder= "Linac")
+
         with col2:
-            Fis = st.selectbox('Físico',('Fisico', "1"), index= 1)
+            Fis = st.sidebar.text_input("Digite o operador", value="Físico" ,placeholder= "Fis")
+
         with col3:
-            dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d_%m_%Y")
+            dia = st.sidebar.date_input("Data de realização do teste:", value= date.today())    
+            data_teste = dia.strftime("%m-%d-%Y")
 
         if not Unit or not Fis:
-            st.warning("Preencher campos de registro faltantes")
+            st.sidebar.warning("Preencher campos de registro faltantes")
         else:
-            nomepdf = 'CP_' + Unit + '_' + data_teste +'.pdf'
-
-            cat.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+            nomepdf = 'CatPhan_' + Unit + '_' + data_teste +'.pdf'
+       
+        #Gerar pdf
+            
+            cat.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
-            st.download_button(label="Download PDF",
-                                data=PDFbyte,
-                                file_name=nomepdf,
-                                mime='application/octet-stream') 
+            st.sidebar.success("PDF gerado!")
+            st.sidebar.download_button(label="Download PDF",
+                               data=PDFbyte,
+                               file_name=nomepdf,
+                               mime='application/octet-stream')
         
             
    

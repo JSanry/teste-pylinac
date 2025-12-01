@@ -35,8 +35,8 @@ def show_PF():
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.05, max_value=1.5, value=0.15)
     a_tol = st.sidebar.number_input(label='Ação de Tolerancia',step=0.05,format="%.2f",min_value=0.05, max_value=1.5, value=0.1)
     #r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
-    orient = st.sidebar.selectbox('Orientação',('Left-Right', 'Up-Down'))
-    mlc = st.sidebar.selectbox('MLC',('Millennium80', 'Millennium','HD Millennium','B Mod','MLCI','Halcyon Distal','Halcyon Proximal','Agility'))
+    orient = st.sidebar.selectbox('Orientação',('Left-Right', 'Up-Down'), index= 1)
+    mlc = st.sidebar.selectbox('MLC',('Millennium80', 'Millennium','HD Millennium','B Mod','MLCI','Halcyon Distal','Halcyon Proximal','Agility'), index= 7)
     prof =st.sidebar.checkbox('Plotar profile pior lamina')
     #names =st.sidebar.checkbox('Usar Nome de Arquivos')
     #mlc_ar = MLC.MILLENNIUM
@@ -109,8 +109,7 @@ def show_PF():
        
         #Gerar pdf
             
-            #pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
-            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png")
+            pf.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.sidebar.success("PDF gerado!")
