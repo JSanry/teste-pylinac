@@ -37,8 +37,8 @@ def show_SS():
     #Parametros analise
     tol = st.sidebar.number_input(label='Tolerancia',step=0.05,format="%.2f",min_value=0.1, max_value=2.0, value=0.8)
     r = st.sidebar.number_input(label='Raio',step=0.05,format="%.2f",min_value=0.19, max_value=0.96, value=0.5)
-    min_p = st.sidebar.number_input(label='Min Peak Heigth',step=0.05,format="%.2f",min_value=0.1, max_value=0.95, value=0.25)
-    dpi_inp = st.sidebar.number_input(label='DPI',step=1.0 ,format="%.1f",min_value=80.0, max_value=200.0, value=100.0)
+    min_p = st.sidebar.number_input(label='Min Peak Heigth',step=0.05,format="%.2f",min_value=0.05, max_value=0.95, value=0.25)
+    dpi_inp = st.sidebar.number_input(label='DPI',step=1.0 ,format="%.1f",min_value=80.0, max_value=500.0, value=100.0)
     sid_inp = st.sidebar.number_input(label='SID (mm)',step=1.0 ,format="%.1f",min_value=700.0, max_value=1900.0, value=1000.0)
 
     r_input = st.sidebar.checkbox (label="Recursivo", value= True)
