@@ -24,6 +24,7 @@ def show_LD():
     st.sidebar.header("LeedsTOR")
     low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.099, value=0.010)
     hg_th = st.sidebar.number_input(label='high  contrast threshold',step=0.05,format="%.2f",min_value=0.01, max_value=1.50, value=0.05)
+    vs_th = st.sidebar.number_input(label='visibility threshold',step=1.0,format="%.1f",min_value=1.0, max_value=200.0, value=100.0)
     ssd_auto = st.sidebar.checkbox(label= 'SSD auto', value=True)
     if ssd_auto:
         ssd_input= "auto"
@@ -35,36 +36,41 @@ def show_LD():
 
     if img_ld is not None:  
         leeds = LeedsTOR(img_ld)
-        leeds.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, ssd=ssd_input)
+        leeds.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th,visibility_threshold= vs_th , ssd=ssd_input)
 
         leeds.save_analyzed_image("img_leeds")
         img_resl= Image.open('img_leeds.png')
         st.image(img_resl, output_format="auto")
 
-
-        st.title('Defenições PDF')
             
+        st.sidebar.header("Definições PDF")
+        
         col1, col2, col3 = st.columns(3)
         with col1:
-            Unit = st.selectbox('Unidade',('iX', 'True Beam'), index= None)
+            Unit = st.sidebar.text_input("Digite a máquina", value="Linac" ,placeholder= "VersaHD")
+
         with col2:
-            Fis = st.selectbox('Físico',('Laura', 'Victor', 'Marcus'), index= None)
+            Fis = st.sidebar.text_input("Digite o operador", value="Físico" ,placeholder= "Fis")
+
         with col3:
-            dia = st.date_input("Data de realização do teste:", value= date.today())    
-            data_teste = dia.strftime("%d_%m_%Y")
+            dia = st.sidebar.date_input("Data de realização do teste:", value= date.today())    
+            data_teste = dia.strftime("%m-%d-%Y")
 
         if not Unit or not Fis:
-            st.warning("Preencher campos de registro faltantes")
+            st.sidebar.warning("Preencher campos de registro faltantes")
         else:
             nomepdf = 'LeedsTOR_' + Unit + '_' + data_teste +'.pdf'
-
-            leeds.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/main/logoinrad.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
+       
+        #Gerar pdf
+            
+            leeds.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
-            st.download_button(label="Download PDF",
-                                data=PDFbyte,
-                                file_name=nomepdf,
-                                mime='application/octet-stream') 
+            st.sidebar.success("PDF gerado!")
+            st.sidebar.download_button(label="Download PDF",
+                               data=PDFbyte,
+                               file_name=nomepdf,
+                               mime='application/octet-stream')
         
             
    
