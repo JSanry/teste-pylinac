@@ -94,7 +94,7 @@ def show_SS():
             nomepdf = 'StarShot_' + Unit + '_' + Par + '_' + data_teste +'.pdf'
        
         #Gerar pdf
-            my_star.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
+            my_star.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-EXT/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'Parâmetro': Par, 'Data': data_teste, 'Raio Analise':r})
             
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
