@@ -38,9 +38,9 @@ logo_path = os.path.join(parent_dir, "logoDOR.svg")
 styles = {
     "nav": {
         #"background-color": "#e4e7ff", 
-        "background-color": "#c4ae8084",
+        "background-color": "#a7ffd3e4",
         "justify-content": "left",
-        "primary-color": "#be9c40ce",
+        "primary-color": "#00d32ece",
         "display": "flex",
         "height": "2.85rem",
         "padding-left": "20rem",
@@ -56,7 +56,7 @@ styles = {
     "active": {
         "background-color": "white",
         #"color": "var(--text-color)",
-        "color": "#be9c40ce",
+        "color": "#caffc0ce",
         "font-weight": "bold",
         "padding": "14px",
     }
