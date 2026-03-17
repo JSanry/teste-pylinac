@@ -23,7 +23,7 @@ def show_home():
     
     st.markdown("*Links:*")
     
-    htp = "https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png"
+    htp = "https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-EXT/logoDOR.png"
     
     col1,col2, col3 = st.columns(spec=[0.35,0.2,0.3])
     with col2:
