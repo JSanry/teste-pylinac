@@ -26,13 +26,14 @@ def show_LV():
     low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.099, value=0.010)
     hg_th = st.sidebar.number_input(label='high  contrast threshold',step=0.05,format="%.2f",min_value=0.01, max_value=1.50, value=0.05)
     vs_th = st.sidebar.number_input(label='visibility threshold',step=1.0,format="%.1f",min_value=1.0, max_value=200.0, value=100.0)
+    inv_input = st.sidebar.checkbox(label= 'Invert', value=False)
     ssd_auto = st.sidebar.checkbox(label= 'SSD auto', value=True)
     if ssd_auto:
         ssd_input= "auto"
     else:
         ssd_input = st.sidebar.number_input(label='SDD (mm)',step=1.0 ,format="%.1f",min_value=700.0, max_value=1900.0, value=1000.0)
     
-    ang_input = st.sidebar.number_input(label='Ângulo (°)',step=1.0 ,format="%.1f",min_value=-360.0, max_value=360.0, value=0.0)
+    ang_input = st.sidebar.number_input(label='Angle (°)',step=1.0 ,format="%.1f",min_value=-360.0, max_value=360.0, value=0.0)
 
     
     img_lv = st.file_uploader('upload', label_visibility= "hidden")
@@ -43,7 +44,7 @@ def show_LV():
         else:
             las= LasVegas(img_lv)
 
-        las.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, visibility_threshold= vs_th, ssd=ssd_input, angle_adjustment= ang_input)
+        las.analyze(low_contrast_threshold=low_th, high_contrast_threshold= hg_th, visibility_threshold= vs_th, ssd=ssd_input, angle_adjustment= ang_input, invert= inv_input)
 
         las.save_analyzed_image("img_lv_a")
         img_reslv= Image.open('img_lv_a.png')
