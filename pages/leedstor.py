@@ -22,7 +22,7 @@ def show_LD():
     st.markdown("# Leeds TOR ⚪")
 
     st.sidebar.header("LeedsTOR")
-    low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.099, value=0.010)
+    low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.5, value=0.010)
     hg_th = st.sidebar.number_input(label='high  contrast threshold',step=0.05,format="%.2f",min_value=0.01, max_value=1.50, value=0.05)
     vs_th = st.sidebar.number_input(label='visibility threshold',step=1.0,format="%.1f",min_value=1.0, max_value=200.0, value=100.0)
     ssd_auto = st.sidebar.checkbox(label= 'SSD auto', value=True)
@@ -41,6 +41,8 @@ def show_LD():
         leeds.save_analyzed_image("img_leeds")
         img_resl= Image.open('img_leeds.png')
         st.image(img_resl, output_format="auto")
+
+        st.markdown(leeds.results())
 
             
         st.sidebar.header("Definições PDF")
