@@ -23,9 +23,9 @@ def show_LV():
 
     st.sidebar.header("Las Vegas")
     phantom = st.sidebar.selectbox('Phantom',('LasVegas','ElektaLasVegas'),index= 1)
-    low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.099, value=0.010)
-    hg_th = st.sidebar.number_input(label='high  contrast threshold',step=0.05,format="%.2f",min_value=0.01, max_value=1.50, value=0.05)
-    vs_th = st.sidebar.number_input(label='visibility threshold',step=1.0,format="%.1f",min_value=1.0, max_value=200.0, value=100.0)
+    low_th = st.sidebar.number_input(label='low contrast threshold',step=0.05,format="%.3f",min_value=0.001, max_value=0.5, value=0.100)
+    hg_th = st.sidebar.number_input(label='high  contrast threshold',step=0.05,format="%.2f",min_value=0.01, max_value=1.50, value=0.9)
+    vs_th = st.sidebar.number_input(label='visibility threshold',step=1.0,format="%.1f",min_value=1.0, max_value=200.0, value=50.0)
     inv_input = st.sidebar.checkbox(label= 'Invert', value=False)
     ssd_auto = st.sidebar.checkbox(label= 'SSD auto', value=True)
     if ssd_auto:
@@ -39,7 +39,7 @@ def show_LV():
     img_lv = st.file_uploader('upload', label_visibility= "hidden")
 
     if img_lv is not None:  
-        if phantom == ElektaLasVegas:
+        if phantom == "ElektaLasVegas":
             las= ElektaLasVegas(img_lv)
         else:
             las= LasVegas(img_lv)
@@ -49,6 +49,8 @@ def show_LV():
         las.save_analyzed_image("img_lv_a")
         img_reslv= Image.open('img_lv_a.png')
         st.image(img_reslv, output_format="auto")
+
+        st.markdown(las.results())
 
         st.sidebar.header("Definições PDF")
         
