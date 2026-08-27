@@ -108,7 +108,7 @@ def show_FA():
         else:
             nomepdf = 'Field_' + '_'+ Campo +'_' + Unit +'_' + data_teste +'.pdf'
         #Gerar pdf
-            fa.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png", metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
+            fa.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'Data': data_teste, "Campo": Campo})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             

@@ -79,7 +79,7 @@ def show_CP():
        
         #Gerar pdf
             
-            cat.publish_pdf(filename="res.pdf",open_file=False, logo="https://raw.githubusercontent.com/JSanry/teste-pylinac/USER-JABS/logoDOR.png" , metadata={'Físico': Fis, 'Unidade': Unit, 'MTF10': MTFdata, 'Data': data_teste})
+            cat.publish_pdf(filename="res.pdf",open_file=False, metadata={'Físico': Fis, 'Unidade': Unit, 'MTF10': MTFdata, 'Data': data_teste})
             with open("res.pdf", "rb") as pdf_file:
                 PDFbyte = pdf_file.read()
             st.sidebar.success("PDF gerado!")
